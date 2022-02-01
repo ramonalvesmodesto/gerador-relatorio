@@ -64,7 +64,7 @@ function createTableEditable(json) {
         row = `
             <tr>
                 <td class="data">${obj.data}</td>
-                <td contenteditable="true">0000000</td>
+                <td contenteditable="true"></td>
                 <td>${obj.descricao.replace("/", "")}</td>
                 <td>${obj.quantidade}</td>
                 <td>R$${obj.unitario}</td>
