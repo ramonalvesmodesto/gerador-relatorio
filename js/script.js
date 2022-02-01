@@ -68,7 +68,7 @@ function createTableEditable(json) {
                 <td>${obj.descricao.replace("/", "")}</td>
                 <td>${obj.quantidade}</td>
                 <td>R$${obj.unitario}</td>
-                <td class="valor">R${obj.valor}</td>
+                <td class="valor">R$${obj.valor}</td>
             </tr>
         `;
 
@@ -83,7 +83,7 @@ function createTableEditable(json) {
                 <td></td>
                 <td></td>
                 <td></td>
-                <td>R${total.toFixed(2)}</td>
+                <td>R$${total.toFixed(2)}</td>
             </tr>
         `;
 
