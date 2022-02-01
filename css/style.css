@@ -32,10 +32,12 @@
     text-transform: uppercase;
     position: relative;
     bottom: 13px;
+    height: 73px;
 }
 
 #jmx {
     width: 100px;
+    height: 73px;
     position: relative;
     top: 30px;
 }
