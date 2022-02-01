@@ -1,16 +1,18 @@
 .container {
     width: 720px;
+    max-width: 720px;
+    padding: 0;
 }
 
 body {
     font-size: 12px;
 }
 
-.navbar {
-    width: 100%;
+.table th {
+    text-align: center;
 }
 
-.table td, .table th {
+.table td {
     text-align: center;
 }
 
@@ -41,11 +43,44 @@ body {
     text-transform: uppercase;
     position: relative;
     bottom: 13px;
+    font-weight: 700;
 }
 
 #jmx {
     width: 100px;
     position: relative;
-    top: 30px;
+    top: 25px;
 }
+
+.content {
+    width: 720px;
+    margin: 0 auto;
+}
+
+@page {
+    size: A4;
+    margin: 40px 60px;
+}
+@media print {
+    html, body {
+        width: 210mm;
+        height: 297mm;    
+        font-size: 10px;   
+    }
+
+    h5 {
+        font-size: 24px;
+    }
+    .container {
+        margin: 0;
+        border: initial;
+        border-radius: initial;
+        width: initial;
+        min-height: initial;
+        box-shadow: initial;
+        background: initial;
+        page-break-after: always;
+    }
+}
+
 

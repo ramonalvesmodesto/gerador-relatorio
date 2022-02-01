@@ -8,7 +8,7 @@ function readXMLAsString(e) {
     var files = input.files;
     var reader = new FileReader();
 
-    reader.readAsText(files[0]);
+    reader.readAsText(files[0], 'ISO-8859-1');
     reader.onload = (e) => {
         xmlString = e.target.result;
     }
@@ -21,7 +21,6 @@ function convertXMLToJSON() {
     var x2js = new X2JS();
     json = x2js.xml_str2json(xmlString);
 
-    console.log(json.file.register);
     createTableEditable(json);
 }
 
@@ -29,7 +28,7 @@ function createTableEditable(json) {
 
     var content = `
         <div class="content">
-            <div class="logo">
+            <div id="logo">
                 <img id="jmx" src="https://ramonalvesmodesto.github.io/gerador-relatorio-jmx/img/logomarca.png">
                 <h5 class="title" contenteditable="true">CARREGAMENTO</h5>
             </div>
@@ -54,40 +53,20 @@ function createTableEditable(json) {
 
     document.getElementById("generatePDF").style.display = "block";
 
-    var total = 0;
     var report = document.getElementById("report");
     report.innerHTML = content;
-    var item = document.getElementById("itens-table");
-    var row = '';
+    
+    if(window.Worker) {
+        const worker = new Worker("js/script-worker-create-table.js");
 
-    for (const obj of json.file.register) {
-        row = `
-            <tr>
-                <td class="data">${obj.data}</td>
-                <td contenteditable="true"></td>
-                <td>${obj.descricao.replace("/", "")}</td>
-                <td>${obj.quantidade}</td>
-                <td>R$${obj.unitario}</td>
-                <td class="valor">R$${obj.valor}</td>
-            </tr>
-        `;
+        worker.postMessage(json);
 
-        item.innerHTML += row;
-        total += parseFloat(obj.valor);
+        worker.onmessage = (e) => {
+            var item = document.getElementById("itens-table");
+            item.innerHTML = e.data;
+        }
     }
-
-    row = `
-            <tr>
-                <td id="total"><strong>TOTAL</strong></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td>R$${total.toFixed(2)}</td>
-            </tr>
-        `;
-
-        item.innerHTML += row;
+   
 }
 
 function generatePDF() {
