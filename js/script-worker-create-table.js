@@ -15,7 +15,7 @@ function createTableRows(json) {
                 <td><p class="oc" contenteditable="true"></p></td>
                 <td><p class="material">${obj.descricao.replace("/", "")}</p></td>
                 <td><p class="quantidade">${obj.quantidade}<p/></td>
-                <td><p class="valor-unitario>R$${obj.unitario}</p></td>
+                <td><p class="valor-unitario">R$${obj.unitario}</p></td>
                 <td><p class="valor">R$${obj.valor}</p></td>
             </tr>
         `;
