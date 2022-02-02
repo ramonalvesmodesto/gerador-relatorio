@@ -58,7 +58,7 @@ p.material {
     left: calc(100% - 80%); 
 }
 
-p.data {
+p.data, #total {
     position: relative;
     left: calc(100% - 90%);
 }
@@ -98,6 +98,7 @@ p.valor {
     h5 {
         font-size: 24px;
     }
+    
     .container {
         margin: 0;
         border: initial;
