@@ -53,32 +53,32 @@ p {
     margin: 0;
 }
 
-p.material {
+td.material {
     position: relative;
-    left: calc(100% - 80%); 
+    left: calc(100% - 87%); 
 }
 
-p.data, #total {
-    position: relative;
-    left: calc(100% - 90%);
-}
-
-p.oc {
+td.data, #total {
     position: relative;
     left: calc(100% - 90%);
 }
 
-p.quantidade {
+td.oc {
+    position: relative;
+    left: calc(100% - 90%);
+}
+
+td.quantidade {
     position: relative;
     left: calc(100% - 65%);
 }
 
-p.valor-unitario {
+td.valor-unitario {
     position: relative;
     left: calc(100% - 70%);
 }
 
-p.valor {
+td.valor {
     position: relative;
     left: calc(100% - 80%);
 }
