@@ -13,7 +13,7 @@ function createTableRows(json) {
             <tr>
                 <td class="data">${obj.data}</td>
                 <td contenteditable="true"></td>
-                <td>${obj.descricao.replace("/", "")}</td>
+                <td class="material">${obj.descricao.replace("/", "")}</td>
                 <td>${obj.quantidade}</td>
                 <td>R$${obj.unitario}</td>
                 <td class="valor">R$${obj.valor}</td>
