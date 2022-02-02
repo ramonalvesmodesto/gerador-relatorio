@@ -65,7 +65,7 @@ td.data, #total {
 
 td.oc {
     position: relative;
-    left: calc(100% - 90%);
+    left: calc(100% - 99%);
 }
 
 td.quantidade {
