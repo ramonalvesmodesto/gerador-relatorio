@@ -11,19 +11,9 @@ function createTableRows(json) {
     for (const obj of json.file.register) {
         row = `
             <tr>
-                <div class="align">
-                    <td class="data">${obj.data}</td>
-                </div>
-
-                <div class="align">
-                    <td contenteditable="true"></td>
-                </div>
-                
-                <div class="align">
-                    <td>${obj.descricao.replace("/", "")}</td>
-                </div>
-                
-                
+                <td class="data">${obj.data}</td>
+                <td contenteditable="true"></td>
+                <td>${obj.descricao.replace("/", "")}</td>
                 <td>${obj.quantidade}</td>
                 <td>R$${obj.unitario}</td>
                 <td class="valor">R$${obj.valor}</td>
