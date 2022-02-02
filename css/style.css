@@ -60,7 +60,7 @@ p.material {
 
 p.data {
     position: relative;
-    left: calc(100% - 99%);
+    left: calc(100% - 90%);
 }
 
 p.oc {
@@ -70,17 +70,17 @@ p.oc {
 
 p.quantidade {
     position: relative;
-    left: calc(100% - 70%);
+    left: calc(100% - 65%);
 }
 
 p.valor-unitario {
     position: relative;
-    left: calc(100% - 60%);
+    left: calc(100% - 70%);
 }
 
 p.valor {
     position: relative;
-    left: calc(100% - 50%);
+    left: calc(100% - 80%);
 }
 
 @page {
