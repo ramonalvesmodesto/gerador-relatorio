@@ -8,12 +8,8 @@ body {
     font-size: 12px;
 }
 
-.table th, .table td  {
+.table th  {
     text-align: center;
-}
-
-#total {
-   text-align: left;
 }
 
 .input-file {
@@ -56,6 +52,31 @@ body {
 p.material {
     position: relative;
     left: calc(100% - 80%); 
+}
+
+p.data {
+    position: relative;
+    left: calc(100% - 99%);
+}
+
+p.oc {
+    position: relative;
+    left: calc(100% - 90%);
+}
+
+p.quantidade {
+    position: relative;
+    left: calc(100% - 70%);
+}
+
+p.valor-unitario {
+    position: relative;
+    left: calc(100% - 60%);
+}
+
+p.valor {
+    position: relative;
+    left: calc(100% - 50%);
 }
 
 @page {
