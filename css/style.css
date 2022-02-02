@@ -55,12 +55,12 @@ p {
 
 td.material {
     position: relative;
-    left: calc(100% - 87%); 
+    left: calc(100% - 96%); 
 }
 
 td.data, #total {
     position: relative;
-    left: calc(100% - 90%);
+    left: calc(100% - 99%);
 }
 
 td.oc {
@@ -70,17 +70,17 @@ td.oc {
 
 td.quantidade {
     position: relative;
-    left: calc(100% - 65%);
+    left: calc(100% - 95%);
 }
 
 td.valor-unitario {
     position: relative;
-    left: calc(100% - 70%);
+    left: calc(100% - 92%);
 }
 
 td.valor {
     position: relative;
-    left: calc(100% - 80%);
+    left: calc(100% - 97%);
 }
 
 @page {
