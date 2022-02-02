@@ -57,6 +57,12 @@ body {
     margin: 0 auto;
 }
 
+p.material {
+    position: relative;
+    left: calc(100% - 80%);
+    
+}
+
 @page {
     size: A4;
     margin: 40px 60px;
