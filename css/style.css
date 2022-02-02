@@ -49,6 +49,10 @@ body {
     margin: 0 auto;
 }
 
+p {
+    margin: 0;
+}
+
 p.material {
     position: relative;
     left: calc(100% - 80%); 
