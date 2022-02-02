@@ -8,11 +8,7 @@ body {
     font-size: 12px;
 }
 
-.table th {
-    text-align: center;
-}
-
-.table td {
+.table th, .table td  {
     text-align: center;
 }
 
@@ -59,14 +55,14 @@ body {
 
 p.material {
     position: relative;
-    left: calc(100% - 80%);
-    
+    left: calc(100% - 80%); 
 }
 
 @page {
     size: A4;
     margin: 40px 60px;
 }
+
 @media print {
     html, body {
         width: 210mm;
