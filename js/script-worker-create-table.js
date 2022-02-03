@@ -1,18 +1,19 @@
 onmessage = function(e) {
     const result = e.data;
+
     postMessage(createTableRows(result));
 }
 
-function createTableRows(json) {
+function createTableRows(arr) {
     var item = '';
     var row = '';
     var total = 0;
 
-    for (const obj of json.file.register) {
+    for (const obj of arr[0].file.register) {
         row = `
             <tr>
                 <td class="data">${obj.data}</td>
-                <td class="oc" contenteditable="true"></td>
+                <td class="num-doc" contenteditable="true">${(arr[1] == "OC" ? '' : obj.documento)}</td>
                 <td class="material">${obj.descricao.replace("/", "")}</td>
                 <td class="quantidade">${obj.quantidade}</td>
                 <td class="valor-unitario">R$${obj.unitario}</td>

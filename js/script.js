@@ -25,22 +25,24 @@ function convertXMLToJSON() {
 }
 
 function createTableEditable(json) {
+    var select = document.getElementsByClassName("form-select")[0];
+    var value = select.options[select.selectedIndex].value;
 
     var content = `
         <div class="content">
             <div id="logo">
-                <img id="jmx" src="https://ramonalvesmodesto.github.io/gerador-relatorio-jmx/img/logomarca.png">
+                <img id="jmx" src="../img/logomarca1.png">
                 <h5 class="title" contenteditable="true">CARREGAMENTO</h5>
             </div>
             <table class="table">
                 <thead class="table-dark">
                     <tr>
-                        <th><strong>DATA</strong></th>
-                        <th><strong>OC</strong></th>
+                        <th class="tr-header-data"><strong>DATA</strong></th>
+                        <th><strong>${value}</strong></th>
                         <th><strong>MATERIAL</strong></th>
                         <th><strong>QUANTIDADE</strong></th>
                         <th><strong>VALOR DO MATERIAL</strong></th>
-                        <th><strong>TOTAL</strong></th>
+                        <th class="tr-header-total"><strong>TOTAL</strong></th>
                     </tr>
                 </thead>
 
@@ -58,8 +60,11 @@ function createTableEditable(json) {
     
     if(window.Worker) {
         const worker = new Worker("js/script-worker-create-table.js");
+        var arr = [];
+        arr.push(json);
+        arr.push(value)
 
-        worker.postMessage(json);
+        worker.postMessage(arr);
 
         worker.onmessage = (e) => {
             var item = document.getElementById("itens-table");

@@ -8,7 +8,25 @@ body {
     font-size: 12px;
 }
 
-.table th  {
+#logo {
+    background-color: #212529;
+    color: white;
+    border-radius: 3px;
+}
+
+.btn-generate-pdf {
+    margin-bottom: 32px;
+}
+
+.tr-header-data {
+    border-radius: 3px 0 0 3px;
+}
+
+.tr-header-total {
+    border-radius: 0 3px 3px 0;
+}
+
+.table th, .table td   {
     text-align: center;
 }
 
@@ -34,14 +52,15 @@ body {
     text-align: center;
     text-transform: uppercase;
     position: relative;
-    bottom: 13px;
+    bottom: 30px;
     font-weight: 700;
 }
 
 #jmx {
     width: 100px;
     position: relative;
-    top: 25px;
+    top: 10px;
+    left: 10px;
 }
 
 .content {
@@ -49,54 +68,23 @@ body {
     margin: 0 auto;
 }
 
-p {
-    margin: 0;
-}
-
-td.material {
-    position: relative;
-    left: calc(100% - 96%); 
-}
-
-td.data, #total {
-    position: relative;
-    left: calc(100% - 99%);
-}
-
-td.oc {
-    position: relative;
-    left: calc(100% - 99%);
-}
-
-td.quantidade {
-    position: relative;
-    left: calc(100% - 95%);
-}
-
-td.valor-unitario {
-    position: relative;
-    left: calc(100% - 92%);
-}
-
-td.valor {
-    position: relative;
-    left: calc(100% - 97%);
+.form-select {
+    width: 100px;
 }
 
 @page {
     size: A4;
-    margin: 40px 60px;
 }
 
 @media print {
     html, body {
         width: 210mm;
-        height: 297mm;    
+        height: 297mm;  
         font-size: 12px;   
     }
 
     h5 {
-        font-size: 24px;
+        font-size: 18px;
     }
     
     .container {
