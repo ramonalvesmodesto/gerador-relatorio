@@ -31,7 +31,7 @@ function createTableEditable(json) {
     var content = `
         <div class="content">
             <div id="logo">
-                <img id="jmx" src="https://github.com/ramonalvesmodesto/gerador-relatorio-jmx/blob/main/img/logomarca1.png">
+                <img id="jmx" src="https://ramonalvesmodesto.github.io/gerador-relatorio-jmx/img/logomarca1.png">
                 <h5 class="title" contenteditable="true">CARREGAMENTO</h5>
             </div>
             <table class="table">
