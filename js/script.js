@@ -37,12 +37,12 @@ function createTableEditable(json) {
             <table class="table">
                 <thead class="table-dark">
                     <tr>
-                        <th class="tr-header-data"><strong>DATA</strong></th>
+                        <th><strong>DATA</strong></th>
                         <th><strong>${value}</strong></th>
                         <th><strong>MATERIAL</strong></th>
                         <th><strong>QUANTIDADE</strong></th>
                         <th><strong>VALOR DO MATERIAL</strong></th>
-                        <th class="tr-header-total"><strong>TOTAL</strong></th>
+                        <th><strong>TOTAL</strong></th>
                     </tr>
                 </thead>
 
