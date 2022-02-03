@@ -1,3 +1,7 @@
+:root {
+    --color-document-blue: #0C356B;
+}
+
 .container {
     width: 720px;
     max-width: 720px;
@@ -9,7 +13,7 @@ body {
 }
 
 #logo {
-    background-color: #212529;
+    background-color: var(--color-document-blue);
     color: white;
     border-radius: 3px;
 }
@@ -18,12 +22,8 @@ body {
     margin-bottom: 32px;
 }
 
-.tr-header-data {
-    border-radius: 3px 0 0 3px;
-}
-
-.tr-header-total {
-    border-radius: 0 3px 3px 0;
+.table-dark {
+    --bs-table-bg: var(--color-document-blue);
 }
 
 .table th, .table td   {
