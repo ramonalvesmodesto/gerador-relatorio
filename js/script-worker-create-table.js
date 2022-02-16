@@ -8,6 +8,29 @@ function createTableRows(arr) {
     var item = '';
     var row = '';
     var total = 0;
+    
+    if(arr[0].file.register[0] === undefined) {
+        item = arr[0].file.register;
+        total = parseFloat(arr[0].file.register.valor);
+        
+        row = `
+            <tr>
+                <td id="total"><strong>TOTAL</strong></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>R$${total.toFixed(2)}</td>
+            </tr>
+        `;
+
+        item += row;
+
+        return item;
+    }
 
     for (const obj of arr[0].file.register) {
         row = `
