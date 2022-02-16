@@ -35,6 +35,9 @@ function createTableRows(arr) {
                 <td></td>
                 <td></td>
                 <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
                 <td>R$${total.toFixed(2)}</td>
             </tr>
         `;
