@@ -73,7 +73,7 @@ body {
 }
 
 @page {
-    size: A4;
+    size: landscape;
 }
 
 @media print {
