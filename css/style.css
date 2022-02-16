@@ -18,6 +18,11 @@ body {
     border-radius: 3px;
 }
 
+#head-doc {
+    display: flex;
+    justify-content: space-between;
+}
+
 .btn-generate-pdf {
     margin-bottom: 32px;
 }
