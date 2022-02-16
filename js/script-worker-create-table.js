@@ -8,6 +8,7 @@ function createTableRows(arr) {
     var item = '';
     var row = '';
     var total = 0;
+    var totalTon = 0;
     
     if(arr[0].file.register[0] === undefined) {
         total = parseFloat(arr[0].file.register.valor);
@@ -31,7 +32,7 @@ function createTableRows(arr) {
                 <td></td>
                 <td></td>
                 <td></td>
-                <td></td>
+                <td>${obj.quantidade}}</td>
                 <td></td>
                 <td>R$${total.toFixed(2)}</td>
             </tr>
@@ -57,6 +58,7 @@ function createTableRows(arr) {
 
         item += row;
         total += parseFloat(obj.valor);
+        totalTon += parseFloat(obj.quantidade);
     }
 
     row = `
@@ -67,7 +69,7 @@ function createTableRows(arr) {
                 <td></td>
                 <td></td>
                 <td></td>
-                <td></td>
+                <td>${totalTon}</td>
                 <td></td>
                 <td>R$${total.toFixed(2)}</td>
             </tr>
