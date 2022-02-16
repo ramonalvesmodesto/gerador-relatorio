@@ -30,6 +30,11 @@ function createTableEditable(json) {
 
     var content = `
         <div class="content">
+            <div id="head-doc">
+                <p>Gerado em: https://ramonalvesmodesto.github.io/gerador-relatorio-jmx/</p>
+                <p>https://github.com/ramonalvesmodesto</p>
+            </div>
+            
             <div id="logo">
                 <img id="jmx" src="https://ramonalvesmodesto.github.io/gerador-relatorio-jmx/img/logomarca1.png">
                 <h5 class="title" contenteditable="true">CARREGAMENTO</h5>
