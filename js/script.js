@@ -38,6 +38,9 @@ function createTableEditable(json) {
                 <thead class="table-dark">
                     <tr>
                         <th><strong>DATA</strong></th>
+                        <th><strong>MOTORISTA</strong></th>
+                        <th><strong>PLACA</strong></th>
+                        <th><strong>DESTINO</strong></th>
                         <th><strong>${value}</strong></th>
                         <th><strong>MATERIAL</strong></th>
                         <th><strong>QUANTIDADE</strong></th>
