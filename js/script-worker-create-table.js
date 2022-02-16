@@ -69,7 +69,7 @@ function createTableRows(arr) {
                 <td></td>
                 <td></td>
                 <td></td>
-                <td>${totalTon}</td>
+                <td>${totalTon.toFixed(2)}</td>
                 <td></td>
                 <td>R$${total.toFixed(2)}</td>
             </tr>
