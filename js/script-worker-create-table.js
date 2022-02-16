@@ -13,6 +13,9 @@ function createTableRows(arr) {
         row = `
             <tr>
                 <td class="data">${obj.data}</td>
+                <td class="motorista" contenteditable="true"></td>
+                <td class="placa" contenteditable="true"></td>
+                <td class="destino" contenteditable="true"></td>
                 <td class="num-doc" contenteditable="true">${(arr[1] == "OC" ? '' : obj.documento)}</td>
                 <td class="material">${obj.descricao.replace("/", "")}</td>
                 <td class="quantidade">${obj.quantidade}</td>
