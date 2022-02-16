@@ -10,6 +10,7 @@ function createTableRows(arr) {
     var total = 0;
     
     if(arr[0].file.register[0] === undefined) {
+        total = parseFloat(arr[0].file.register.valor);
         row = `
             <tr>
                 <td class="data">${arr[0].file.register.data}</td>
@@ -22,12 +23,7 @@ function createTableRows(arr) {
                 <td class="valor-unitario">R$${arr[0].file.register.unitario}</td>
                 <td class="valor">R$${arr[0].file.register.valor}</td>
             </tr>
-        `;
-        
-        item = row;
-        total = parseFloat(arr[0].file.register.valor);
-        
-        row = `
+            
             <tr>
                 <td id="total"><strong>TOTAL</strong></td>
                 <td></td>
@@ -41,9 +37,7 @@ function createTableRows(arr) {
             </tr>
         `;
 
-        item += row;
-
-        return item;
+        return row;
     }
 
     for (const obj of arr[0].file.register) {
