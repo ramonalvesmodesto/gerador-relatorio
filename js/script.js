@@ -50,7 +50,7 @@ function createTableEditable(json) {
                         <th><strong>DESTINO</strong></th>
                         <th><strong>${value}</strong></th>
                         <th><strong>MATERIAL</strong></th>
-                        <th><strong>QUANTIDADE</strong></th>
+                        <th><strong>QUANTIDADE(TON)</strong></th>
                         <th><strong>VALOR DO MATERIAL</strong></th>
                         <th><strong>TOTAL</strong></th>
                     </tr>
