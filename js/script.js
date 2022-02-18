@@ -27,11 +27,13 @@ function convertXMLToJSON() {
 function createTableEditable(json) {
     var select = document.getElementsByClassName("form-select")[0];
     var value = select.options[select.selectedIndex].value;
+    var date = new Date();
 
     var content = `
         <div class="content">
             <div id="head-doc">
                 <p>Gerado em: https://ramonalvesmodesto.github.io/gerador-relatorio-jmx/</p>
+                <p>${date.toLocaleString()}</p>
                 <p>https://github.com/ramonalvesmodesto</p>
             </div>
             
