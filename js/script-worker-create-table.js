@@ -32,7 +32,7 @@ function createTableRows(arr) {
                 <td></td>
                 <td></td>
                 <td></td>
-                <td>${obj.quantidade}}</td>
+                <td>${arr[0].file.register.quantidade}}</td>
                 <td></td>
                 <td>R$${total.toFixed(2)}</td>
             </tr>
