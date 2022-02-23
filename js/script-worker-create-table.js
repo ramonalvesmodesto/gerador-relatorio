@@ -17,7 +17,7 @@ function createTableRows(arr) {
                 <td class="data">${arr[0].file.register.data}</td>
                 <td class="motorista" contenteditable="true"></td>
                 <td class="placa" contenteditable="true"></td>
-                <td class="destino" contenteditable="true">"-----"</td>
+                <td class="destino" contenteditable="true">-----</td>
                 <td class="num-doc" contenteditable="true">${(arr[1] == "OC" ? '' : arr[0].file.register.documento)}</td>
                 <td class="material">${arr[0].file.register.descricao.replace("/", "")}</td>
                 <td class="quantidade">${arr[0].file.register.quantidade}</td>
@@ -47,7 +47,7 @@ function createTableRows(arr) {
                 <td class="data">${obj.data}</td>
                 <td class="motorista" contenteditable="true"></td>
                 <td class="placa" contenteditable="true"></td>
-                <td class="destino" contenteditable="true"></td>
+                <td class="destino" contenteditable="true">-----</td>
                 <td class="num-doc" contenteditable="true">${(arr[1] == "OC" ? '' : obj.documento)}</td>
                 <td class="material">${obj.descricao.replace("/", "")}</td>
                 <td class="quantidade">${obj.quantidade}</td>
