@@ -41,25 +41,9 @@ function createTableEditable(json) {
                 <img id="jmx" src="https://ramonalvesmodesto.github.io/gerador-relatorio-jmx/img/logomarca1.png">
                 <h5 class="title" contenteditable="true">CARREGAMENTO</h5>
             </div>
-            <table class="table">
-                <thead class="table-dark">
-                    <tr>
-                        <th><strong>DATA</strong></th>
-                        <th><strong>MOTORISTA</strong></th>
-                        <th><strong>PLACA</strong></th>
-                        <th><strong>DESTINO</strong></th>
-                        <th><strong>${value}</strong></th>
-                        <th><strong>MATERIAL</strong></th>
-                        <th><strong>QUANTIDADE(TON)</strong></th>
-                        <th><strong>VALOR DO MATERIAL</strong></th>
-                        <th><strong>TOTAL</strong></th>
-                    </tr>
-                </thead>
-
-                <tbody id="itens-table">
-
-                </tbody>
-            </table>
+            <div id="div-table">
+                
+            </div>
         </div>
     `;
 
@@ -67,8 +51,8 @@ function createTableEditable(json) {
 
     var report = document.getElementById("report");
     report.innerHTML = content;
-    
-    if(window.Worker) {
+
+    if (window.Worker) {
         const worker = new Worker("js/script-worker-create-table.js");
         var arr = [];
         arr.push(json);
@@ -77,11 +61,11 @@ function createTableEditable(json) {
         worker.postMessage(arr);
 
         worker.onmessage = (e) => {
-            var item = document.getElementById("itens-table");
-            item.innerHTML = e.data;
+            var divTable = document.getElementById("div-table");
+            divTable.innerHTML = e.data;
         }
     }
-   
+
 }
 
 function generatePDF() {
@@ -111,7 +95,7 @@ function generatePDF() {
     win.document.write(table);
     win.document.write('</body></html>');
     win.focus();
-    
+
     win.document.write('<script type="text/javascript">window.onload(function() { window.print(); window.close(); });</script>');
 }
 

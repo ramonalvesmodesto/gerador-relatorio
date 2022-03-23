@@ -1,5 +1,5 @@
 :root {
-    --color-document-blue: #0C356B;
+    --color-document-blue: #2471A3;
 }
 
 .container {
@@ -15,7 +15,7 @@ body {
 #logo {
     background-color: var(--color-document-blue);
     color: white;
-    border-radius: 3px;
+    border-radius: 5px;
 }
 
 #head-doc {
@@ -27,12 +27,62 @@ body {
     margin-bottom: 32px;
 }
 
-.table-dark {
-    --bs-table-bg: var(--color-document-blue);
+.color-gray {
+    background-color: #555;
+    color: white;
 }
 
-.table th, .table td   {
+tr .color-gray {
+    background-color: #555;
+    color: white;
+}
+
+tr .color-gray:nth-child(7), .total td:nth-child(1) {
+    border-bottom-left-radius: 5px;
+}
+
+tr .color-gray:nth-child(8) {
+    border-bottom-right-radius: 5px;
+}
+
+.table2 {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+td, tr, th {
+    padding: 10px;
+}
+
+.table2 tbody tr.total td {
+    background-color: #666;
+    color: white;
+}
+
+.table2, .table2 tr, .table2 th, .table2 td {
+    border: none;
+}
+
+.table2 th, .table2 td   {
     text-align: center;
+}
+
+/* .table tbody tr:nth-of-type(odd) {
+    background-color: #5DADE2;
+    color: white;
+}
+
+.table tbody tr:nth-of-type(even) {
+    background-color: #5dade293;
+    color: white;
+} */
+
+.table2 tbody tr {
+    background-color: rgb(240, 240, 240);
+}
+
+.table2 tbody tr.nfe {
+    background-color: transparent;
 }
 
 .input-file {
@@ -75,6 +125,19 @@ body {
 
 .form-select {
     width: 100px;
+}
+
+.date {
+    width: 100%;
+    display: block;
+    position: relative;
+    text-align: center;
+    padding: 10px;
+    background-color: #333;
+    color: white;
+    font-size: 14px;
+    font-weight: 900;
+    border-radius: 5px 5px 0 0;
 }
 
 @page {
