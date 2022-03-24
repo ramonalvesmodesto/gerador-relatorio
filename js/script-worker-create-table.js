@@ -140,6 +140,7 @@ const createTableRows = (arr) => {
             </tr>
         `;
 
+        total = 0;
         table += row;
         table += `</tbody></table>`
         tables += table;
