@@ -135,7 +135,7 @@ const createTableRows = (arr) => {
                 <td></td>
                 <td></td>
                 <td></td>
-                <td class="color-gray"><strong>NFe</strong></td>
+                <td class="color-gray" contenteditable="true"><strong>NFe</strong></td>
                 <td class="color-gray" contenteditable="true"></td>
             </tr>
         `;
