@@ -25,7 +25,7 @@ const createTableRows = (arr) => {
                         <th><strong>MOTORISTA</strong></th>
                         <th><strong>PLACA</strong></th>
                         <th><strong>DESTINO</strong></th>
-                        <th><strong>${arr[1]}</strong></th>
+                        <th contenteditable="true"><strong>${arr[1]}</strong></th>
                         <th><strong>MATERIAL</strong></th>
                         <th><strong>QUANTIDADE(TON)</strong></th>
                         <th><strong>VALOR DO MATERIAL</strong></th>
@@ -86,7 +86,7 @@ const createTableRows = (arr) => {
                         <th><strong>MOTORISTA</strong></th>
                         <th><strong>PLACA</strong></th>
                         <th><strong>DESTINO</strong></th>
-                        <th><strong>${arr[1]}</strong></th>
+                        <th contenteditable="true"><strong>${arr[1]}</strong></th>
                         <th><strong>MATERIAL</strong></th>
                         <th><strong>QUANTIDADE(TON)</strong></th>
                         <th><strong>VALOR DO MATERIAL</strong></th>
