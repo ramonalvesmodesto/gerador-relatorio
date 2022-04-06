@@ -32,17 +32,31 @@ body {
     color: white;
 }
 
+.color-gray2 {
+    background-color: #333;
+    color: white;
+}
+
+
 tr .color-gray {
     background-color: #555;
     color: white;
 }
 
-tr .color-gray:nth-child(7), .total td:nth-child(1) {
+.color-gray:nth-child(7), .total td:nth-child(1) {
     border-bottom-left-radius: 5px;
 }
 
-tr .color-gray:nth-child(8) {
+.color-gray:nth-child(8), .total2 td:last-child {
     border-bottom-right-radius: 5px;
+}
+
+.color-gray2 th:nth-child(1) {
+    border-top-left-radius: 5px;
+}
+
+.color-gray2 th:last-child {
+    border-top-right-radius: 5px;
 }
 
 .table2 {
@@ -138,6 +152,14 @@ td, tr, th {
     font-size: 14px;
     font-weight: 900;
     border-radius: 5px 5px 0 0;
+}
+
+.selects {
+    display: flex;
+}
+
+.sel {
+    margin-left: 10px;
 }
 
 @page {

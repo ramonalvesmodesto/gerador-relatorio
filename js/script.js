@@ -25,8 +25,12 @@ function convertXMLToJSON() {
 }
 
 function createTableEditable(json) {
-    var select = document.getElementsByClassName("form-select")[0];
-    var value = select.options[select.selectedIndex].value;
+    var selectModel = document.getElementsByClassName("model")[0];
+    var valueModel = selectModel.options[selectModel.selectedIndex].value;
+
+    var selectModelReport = document.getElementsByClassName("model-report")[0];
+    var valueModelReport = selectModelReport.options[selectModelReport.selectedIndex].value;
+
     var date = new Date();
 
     var content = `
@@ -56,7 +60,8 @@ function createTableEditable(json) {
         const worker = new Worker("js/script-worker-create-table.js");
         var arr = [];
         arr.push(json);
-        arr.push(value)
+        arr.push(valueModel);
+        arr.push(valueModelReport);
 
         worker.postMessage(arr);
 

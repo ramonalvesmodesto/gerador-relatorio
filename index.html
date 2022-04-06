@@ -21,11 +21,19 @@
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
             <a class="navbar-brand" href="#">RELATÓRIO JMX</a>
-            
-            <select class="form-select" aria-label="Default select example">
-                <option selected>OC</option>
-                <option>NF-e</option>
-              </select>
+
+            <div class="selects">
+                <select class="form-select model-report sel" aria-label="Default select example">
+                    <option selected>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                </select>
+    
+                <select class="form-select model sel" aria-label="Default select example">
+                    <option selected>OC</option>
+                    <option>NF-e</option>
+                </select>
+            </div>
         </div>
     </nav>
 
@@ -40,12 +48,12 @@
             </div>
         </div>
 
-        <div class="btn-generate-pdf"> 
+        <div class="btn-generate-pdf">
             <button type="button" id="generatePDF" class="btn btn-secondary" onclick="generatePDF()">Gerar PDF</button>
         </div>
 
         <div id="report" class="sub-container">
-            
+
         </div>
     </div>
 
