@@ -210,7 +210,6 @@ const createTableRowsTwo = (arr) => {
                         <td></td>
                         <td></td>
                         <td></td>
-                        <td></td>
                         <td>${arr[0].file.register.quantidade}</td>
                         <td></td>
                         <td>R$${total.toFixed(2)}</td>
@@ -295,8 +294,7 @@ const createTableRowsTree = (arr) => {
             <table class="table2">
                 <thead class="table-head">
                     <tr class="color-gray">
-                        <th><strong>PLACA</strong></th>
-                        <th contenteditable="true"><strong>${arr[1]}</strong></th>
+                        <th><strong>DATA</strong></th>
                         <th><strong>MATERIAL</strong></th>
                         <th><strong>QUANTIDADE(TON)</strong></th>
                         <th><strong>VALOR DO MATERIAL</strong></th>
@@ -318,7 +316,6 @@ const createTableRowsTree = (arr) => {
                 
                     <tr>
                         <td id="total"><strong>TOTAL</strong></td>
-                        <td></td>
                         <td></td>
                         <td></td>
                         <td>${arr[0].file.register.quantidade}</td>
