@@ -32,7 +32,7 @@ const createTableRowsOne = (arr) => {
             <table class="table2">
                 <thead class="table-head">
 
-                    <strong class="date">${key}</strong>
+                    <strong class="date" contenteditable="true"></strong>
 
                     <tr class="color-gray">
                         <th><strong>MOTORISTA</strong></th>
@@ -176,9 +176,6 @@ const createTableRowsTwo = (arr) => {
         table = `
             <table class="table2">
                 <thead class="table-head">
-
-                    <strong class="date">${key}</strong>
-
                     <tr class="color-gray">
                         <th><strong>DATA</strong></th>
                         <th><strong>MOTORISTA</strong></th>
@@ -297,9 +294,6 @@ const createTableRowsTree = (arr) => {
         table = `
             <table class="table2">
                 <thead class="table-head">
-
-                    <strong class="date">${key}</strong>
-
                     <tr class="color-gray">
                         <th><strong>PLACA</strong></th>
                         <th contenteditable="true"><strong>${arr[1]}</strong></th>
