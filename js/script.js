@@ -76,12 +76,18 @@ function createTableEditable(json) {
 function generatePDF() {
     document.getElementsByClassName('btn-generate-pdf')[0].style.display = 'none';
     document.getElementsByClassName('input-file')[0].style.display = 'none';
-    document.getElementsByClassName('container-fluid')[0].style.display = 'none';
+    document.getElementsByClassName('navbar')[0].style.display = 'none';
+    document.getElementsByClassName('container')[0].style.width = '100%';
+    document.getElementsByClassName('container')[0].style.maxWidth = '100%';
+    document.getElementsByClassName('container')[0].style.margin = '0';
     window.print();
     setTimeout(() => {
         document.getElementsByClassName('btn-generate-pdf')[0].style.display = 'flex';
         document.getElementsByClassName('input-file')[0].style.display = 'flex';
-        document.getElementsByClassName('container-fluid')[0].style.display = 'flex';
+        document.getElementsByClassName('navbar')[0].style.display = 'flex';
+        document.getElementsByClassName('container')[0].style.width = '900px';
+        document.getElementsByClassName('container')[0].style.maxWidth = '900px';
+        document.getElementsByClassName('container')[0].style.margin = '0 auto';
     }, 1000);
 }
 
