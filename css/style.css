@@ -162,10 +162,6 @@ td, tr, th {
     margin-left: 10px;
 }
 
-@page {
-    size: landscape;
-}
-
 @media print {
     html, body {
         font-size: 12px;   
