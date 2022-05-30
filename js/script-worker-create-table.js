@@ -62,7 +62,7 @@ const createTableRowsOne = (arr) => {
                         <td class="valor">R$${arr[0].file.register.valor}</td>
                     </tr>
                 
-                    <tr>
+                    <tr class="color-gray-light total">
                         <td id="total"><strong>TOTAL</strong></td>
                         <td></td>
                         <td></td>
@@ -201,7 +201,7 @@ const createTableRowsOnev2 = (arr) => {
                         <td class="valor">R$${arr[0].file.register.valor}</td>
                     </tr>
                 
-                    <tr>
+                    <tr class="color-gray-light total">
                         <td id="total"><strong>TOTAL</strong></td>
                         <td></td>
                         <td>${arr[0].file.register.quantidade}</td>
@@ -268,14 +268,6 @@ const createTableRowsOnev2 = (arr) => {
                 <td></td>
                 <td>R$${total.toFixed(2)}</td>
             </tr>
-
-            <tr class="nfe">
-                <td></td>
-                <td></td>
-                <td></td>
-                <td class="color-gray" contenteditable="true"><strong>NFe</strong></td>
-                <td class="color-gray" contenteditable="true"></td>
-            </tr>
         `;
 
         total = 0;
@@ -329,7 +321,7 @@ const createTableRowsTwo = (arr) => {
                     </tr>
                 
                     <tr>
-                        <td id="total"><strong>TOTAL</strong></td>
+                        <td class="color-gray-light total"><strong>TOTAL</strong></td>
                         <td></td>
                         <td></td>
                         <td></td>
