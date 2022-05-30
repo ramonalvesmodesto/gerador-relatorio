@@ -35,7 +35,7 @@ const createTableRowsOne = (arr) => {
             <table class="table2">
                 <thead class="table-head">
 
-                    <strong class="date" contenteditable="true"></strong>
+                    <strong class="date" contenteditable="true">${arr[0].file.register.data}</strong>
 
                     <tr class="color-gray">
                         <th><strong>MOTORISTA</strong></th>
@@ -180,7 +180,7 @@ const createTableRowsOnev2 = (arr) => {
             <table class="table2">
                 <thead class="table-head">
 
-                    <strong class="date" contenteditable="true">arr[0].file.register.data</strong>
+                    <strong class="date" contenteditable="true">${arr[0].file.register.data}</strong>
 
                     <tr class="color-gray">
                         <th contenteditable="true"><strong>${arr[1]}</strong></th>
