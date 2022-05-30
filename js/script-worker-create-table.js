@@ -423,8 +423,6 @@ const createTableRowsTree = (arr) => {
             
                     <tr>
                         <td class="data">${arr[0].file.register.data}</td>
-                        <td class="placa" contenteditable="true"></td>
-                        <td class="num-doc" contenteditable="true">${(arr[1] == "OC" ? '' : arr[0].file.register.documento)}</td>
                         <td class="material">${arr[0].file.register.descricao.replace("/", "")}</td>
                         <td class="quantidade">${arr[0].file.register.quantidade}</td>
                         <td class="valor-unitario">R$${arr[0].file.register.unitario}</td>
@@ -433,7 +431,6 @@ const createTableRowsTree = (arr) => {
                 
                     <tr class="color-gray-light total">
                         <td id="total"><strong>TOTAL</strong></td>
-                        <td></td>
                         <td></td>
                         <td>${arr[0].file.register.quantidade}</td>
                         <td></td>
