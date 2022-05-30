@@ -320,8 +320,8 @@ const createTableRowsTwo = (arr) => {
                         <td class="valor">R$${arr[0].file.register.valor}</td>
                     </tr>
                 
-                    <tr>
-                        <td class="color-gray-light total"><strong>TOTAL</strong></td>
+                    <tr class="color-gray-light total">
+                        <td id="total"><strong>TOTAL</strong></td>
                         <td></td>
                         <td></td>
                         <td></td>
@@ -431,7 +431,7 @@ const createTableRowsTree = (arr) => {
                         <td class="valor">R$${arr[0].file.register.valor}</td>
                     </tr>
                 
-                    <tr>
+                    <tr class="color-gray-light total">
                         <td id="total"><strong>TOTAL</strong></td>
                         <td></td>
                         <td></td>
