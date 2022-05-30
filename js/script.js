@@ -77,9 +77,9 @@ function generatePDF() {
     document.getElementsByClassName('btn-generate-pdf')[0].style.display = 'none';
     document.getElementsByClassName('input-file')[0].style.display = 'none';
     document.getElementsByClassName('navbar')[0].style.display = 'none';
-    document.getElementsByClassName('container')[0].style.width = '100%';
-    document.getElementsByClassName('container')[0].style.maxWidth = '100%';
-    document.getElementsByClassName('container')[0].style.margin = '0';
+    document.getElementsByClassName('container')[0].style.width = '90%';
+    document.getElementsByClassName('container')[0].style.maxWidth = '90%';
+    document.getElementsByClassName('container')[0].style.margin = '56px';
     window.print();
     setTimeout(() => {
         document.getElementsByClassName('btn-generate-pdf')[0].style.display = 'flex';
