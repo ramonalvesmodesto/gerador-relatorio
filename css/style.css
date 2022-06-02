@@ -27,7 +27,7 @@ body {
     margin-bottom: 32px;
 }
 
-.color-gray {
+.color-gray, .table2 tbody .trThhead {
     background-color: #555;
     color: white;
 }
@@ -162,7 +162,12 @@ td, tr, th {
     margin-left: 10px;
 }
 
-@media print {
+@page {
+    size: auto;
+    margin: 15mm;
+}
+
+/* @media print {
     html, body {
         font-size: 12px;   
     }
@@ -181,6 +186,6 @@ td, tr, th {
         background: initial;
         page-break-after: always;
     }
-}
+} */
 
 

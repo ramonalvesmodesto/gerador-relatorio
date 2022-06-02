@@ -34,13 +34,13 @@ function createTableEditable(json) {
     var date = new Date();
 
     var content = `
-        <div class="content">
-            <div id="head-doc">
-                <p>Gerado em: https://ramonalvesmodesto.github.io/gerador-relatorio-jmx/</p>
-                <p>${date.toLocaleString()}</p>
-                <p>https://github.com/ramonalvesmodesto</p>
+            <div class="content"> 
+                <div id="head-doc">
+                    <p>Gerado em: https://ramonalvesmodesto.github.io/gerador-relatorio-jmx/</p>
+                    <p>${date.toLocaleString()}</p>
+                </div>
             </div>
-            
+
             <div id="logo">
                 <img id="jmx" src="https://ramonalvesmodesto.github.io/gerador-relatorio-jmx/img/logomarca1.png">
                 <h5 class="title" contenteditable="true">CARREGAMENTO</h5>
@@ -62,6 +62,11 @@ function createTableEditable(json) {
         arr.push(json);
         arr.push(valueModel);
         arr.push(valueModelReport);
+        console.log(arr)
+
+        if(arr[2] == 'Relatório NFe') {
+            document.getElementsByClassName("title")[0].innerHTML = 'Relatório de vendas JMX'
+        }
 
         worker.postMessage(arr);
 
@@ -77,18 +82,12 @@ function generatePDF() {
     document.getElementsByClassName('btn-generate-pdf')[0].style.display = 'none';
     document.getElementsByClassName('input-file')[0].style.display = 'none';
     document.getElementsByClassName('navbar')[0].style.display = 'none';
-    document.getElementsByClassName('container')[0].style.width = '90%';
-    document.getElementsByClassName('container')[0].style.maxWidth = '90%';
-    document.getElementsByClassName('container')[0].style.margin = '56px';
     window.print();
     setTimeout(() => {
         document.getElementsByClassName('btn-generate-pdf')[0].style.display = 'flex';
         document.getElementsByClassName('input-file')[0].style.display = 'flex';
         document.getElementsByClassName('navbar')[0].style.display = 'flex';
-        document.getElementsByClassName('container')[0].style.width = '900px';
-        document.getElementsByClassName('container')[0].style.maxWidth = '900px';
-        document.getElementsByClassName('container')[0].style.margin = '0 auto';
-    }, 1000);
+    }, 0);
 }
 
 

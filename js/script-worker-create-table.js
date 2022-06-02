@@ -17,7 +17,61 @@ onmessage = function (e) {
         case '4':
             postMessage(createTableRowsOnev2(result));
             break;
+        case 'Relatório NFe':
+            postMessage(createReportNFe(result));
+            break;
     }
+}
+
+const createReportNFe = (arr) => {
+    console.log(arr[0].enviNFe.nfeProc)
+    console.log(arr[0].enviNFe.nfeProc[0].NFe.infNFe.ide.nNF)
+
+    var table = '';
+    var row = '';
+    var total = 0;
+    var totalTon = 0;
+
+    table = `
+        <table class="table2">
+
+                <tr class="trThhead">
+                    <th><strong>DATA</strong></th>
+                    <th><strong>NFe</strong></th>
+                    <th><strong>VALOR</strong></th>
+                    <th><strong>CLIENTES</strong></th>
+                </tr>
+
+            <tbody id="itens-table">`;
+
+    for (const obj of arr[0].enviNFe.nfeProc) {
+        row = `
+            <tr>
+                <td class="data">${obj.NFe.infNFe.ide.dhEmi.split('T')[0]}</td>
+                <td class="nfe">${obj.NFe.infNFe.ide.nNF}</td>
+                <td class="valor">${obj.NFe.infNFe.pag.detPag.vPag}</td>
+                <td class="conta">${obj.NFe.infNFe.dest.xNome.split(' ')[0]}</td>
+            </tr>
+        `;
+
+        table += row;
+        total += parseFloat(obj.NFe.infNFe.pag.detPag.vPag);
+        totalTon += parseFloat(obj.quantidade);
+    }
+
+    row = `
+            <tr class="color-gray-light total total2">
+                <td id="total"><strong>TOTAL</strong></td>
+                <td></td>
+                <td>R$${total.toFixed(2)}</td>
+                <td></td>
+            </tr>
+        `;
+    table += row;
+    table += `</tbody></table>`;
+
+    return table;
+    
 }
 
 const createTableRowsOne = (arr) => {
@@ -52,14 +106,14 @@ const createTableRowsOne = (arr) => {
                 <tbody id="itens-table">
             
                     <tr>
-                        <td class="motorista" contenteditable="true"></td>
-                        <td class="placa" contenteditable="true"></td>
-                        <td class="destino" contenteditable="true">-----</td>
-                        <td class="num-doc" contenteditable="true">${(arr[1] == "OC" ? '' : arr[0].file.register.documento)}</td>
-                        <td class="material">${arr[0].file.register.descricao.replace("/", "")}</td>
-                        <td class="quantidade">${arr[0].file.register.quantidade}</td>
-                        <td class="valor-unitario">R$${arr[0].file.register.unitario}</td>
-                        <td class="valor">R$${arr[0].file.register.valor}</td>
+                        <td contenteditable="true"></td>
+                        <td contenteditable="true"></td>
+                        <td contenteditable="true"></td>
+                        <td contenteditable="true">${(arr[1] == "OC" ? '' : arr[0].file.register.documento)}</td>
+                        <td>${arr[0].file.register.descricao.replace("/", "")}</td>
+                        <td>${arr[0].file.register.quantidade}</td>
+                        <td>R$${arr[0].file.register.unitario}</td>
+                        <td>R$${arr[0].file.register.valor}</td>
                     </tr>
                 
                     <tr class="color-gray-light total">
@@ -114,14 +168,14 @@ const createTableRowsOne = (arr) => {
         for (const obj of objDate[key]) {
             row = `
                     <tr>
-                        <td class="motorista" contenteditable="true"></td>
-                        <td class="placa" contenteditable="true"></td>
-                        <td class="destino" contenteditable="true">   </td>
-                        <td class="num-doc" contenteditable="true">${(arr[1] == "OC" ? '' : obj.documento)}</td>
-                        <td class="material">${obj.descricao.replace("/", "")}</td>
-                        <td class="quantidade">${obj.quantidade}</td>
-                        <td class="valor-unitario">R$${obj.unitario}</td>
-                        <td class="valor">R$${obj.valor}</td>
+                        <td contenteditable="true"></td>
+                        <td contenteditable="true"></td>
+                        <td contenteditable="true">   </td>
+                        <td contenteditable="true">${(arr[1] == "OC" ? '' : obj.documento)}</td>
+                        <td>${obj.descricao.replace("/", "")}</td>
+                        <td>${obj.quantidade}</td>
+                        <td>R$${obj.unitario}</td>
+                        <td>R$${obj.valor}</td>
                     </tr>
                 `;
 
@@ -194,11 +248,11 @@ const createTableRowsOnev2 = (arr) => {
                 <tbody id="itens-table">
             
                     <tr>
-                        <td class="num-doc" contenteditable="true">${(arr[1] == "OC" ? '' : arr[0].file.register.documento)}</td>
-                        <td class="material">${arr[0].file.register.descricao.replace("/", "")}</td>
-                        <td class="quantidade">${arr[0].file.register.quantidade}</td>
-                        <td class="valor-unitario">R$${arr[0].file.register.unitario}</td>
-                        <td class="valor">R$${arr[0].file.register.valor}</td>
+                        <td contenteditable="true">${(arr[1] == "OC" ? '' : arr[0].file.register.documento)}</td>
+                        <td>${arr[0].file.register.descricao.replace("/", "")}</td>
+                        <td>${arr[0].file.register.quantidade}</td>
+                        <td>R$${arr[0].file.register.unitario}</td>
+                        <td>R$${arr[0].file.register.valor}</td>
                     </tr>
                 
                     <tr class="color-gray-light total">
@@ -247,11 +301,11 @@ const createTableRowsOnev2 = (arr) => {
         for (const obj of objDate[key]) {
             row = `
                     <tr>
-                        <td class="num-doc" contenteditable="true">${(arr[1] == "OC" ? '' : obj.documento)}</td>
-                        <td class="material">${obj.descricao.replace("/", "")}</td>
-                        <td class="quantidade">${obj.quantidade}</td>
-                        <td class="valor-unitario">R$${obj.unitario}</td>
-                        <td class="valor">R$${obj.valor}</td>
+                        <td contenteditable="true">${(arr[1] == "OC" ? '' : obj.documento)}</td>
+                        <td>${obj.descricao.replace("/", "")}</td>
+                        <td>${obj.quantidade}</td>
+                        <td>R$${obj.unitario}</td>
+                        <td>R$${obj.valor}</td>
                     </tr>
                 `;
 
@@ -309,15 +363,15 @@ const createTableRowsTwo = (arr) => {
                 <tbody id="itens-table">
             
                     <tr>
-                        <td class="data">${arr[0].file.register.data}</td>
-                        <td class="motorista" contenteditable="true"></td>
-                        <td class="placa" contenteditable="true"></td>
-                        <td class="destino" contenteditable="true">-----</td>
-                        <td class="num-doc" contenteditable="true">${(arr[1] == "OC" ? '' : arr[0].file.register.documento)}</td>
-                        <td class="material">${arr[0].file.register.descricao.replace("/", "")}</td>
-                        <td class="quantidade">${arr[0].file.register.quantidade}</td>
-                        <td class="valor-unitario">R$${arr[0].file.register.unitario}</td>
-                        <td class="valor">R$${arr[0].file.register.valor}</td>
+                        <td>${arr[0].file.register.data}</td>
+                        <td contenteditable="true"></td>
+                        <td contenteditable="true"></td>
+                        <td contenteditable="true"></td>
+                        <td contenteditable="true">${(arr[1] == "OC" ? '' : arr[0].file.register.documento)}</td>
+                        <td>${arr[0].file.register.descricao.replace("/", "")}</td>
+                        <td>${arr[0].file.register.quantidade}</td>
+                        <td>R$${arr[0].file.register.unitario}</td>
+                        <td>R$${arr[0].file.register.valor}</td>
                     </tr>
                 
                     <tr class="color-gray-light total">
@@ -359,15 +413,15 @@ const createTableRowsTwo = (arr) => {
     for (const obj of arr[0].file.register) {
         row = `
             <tr>
-                <td class="data">${obj.data}</td>
-                <td class="motorista" contenteditable="true"></td>
-                <td class="placa" contenteditable="true"></td>
-                <td class="destino" contenteditable="true">-----</td>
-                <td class="num-doc" contenteditable="true">${(arr[1] == "OC" ? '' : obj.documento)}</td>
-                <td class="material">${obj.descricao.replace("/", "")}</td>
-                <td class="quantidade">${obj.quantidade}</td>
-                <td class="valor-unitario">R$${obj.unitario}</td>
-                <td class="valor">R$${obj.valor}</td>
+                <td>${obj.data}</td>
+                <td contenteditable="true"></td>
+                <td contenteditable="true"></td>
+                <td contenteditable="true">-----</td>
+                <td contenteditable="true">${(arr[1] == "OC" ? '' : obj.documento)}</td>
+                <td>${obj.descricao.replace("/", "")}</td>
+                <td>${obj.quantidade}</td>
+                <td>R$${obj.unitario}</td>
+                <td>R$${obj.valor}</td>
             </tr>
         `;
 
@@ -422,11 +476,11 @@ const createTableRowsTree = (arr) => {
                 <tbody id="itens-table">
             
                     <tr>
-                        <td class="data">${arr[0].file.register.data}</td>
-                        <td class="material">${arr[0].file.register.descricao.replace("/", "")}</td>
-                        <td class="quantidade">${arr[0].file.register.quantidade}</td>
-                        <td class="valor-unitario">R$${arr[0].file.register.unitario}</td>
-                        <td class="valor">R$${arr[0].file.register.valor}</td>
+                        <td>${arr[0].file.register.data}</td>
+                        <td>${arr[0].file.register.descricao.replace("/", "")}</td>
+                        <td>${arr[0].file.register.quantidade}</td>
+                        <td>R$${arr[0].file.register.unitario}</td>
+                        <td>R$${arr[0].file.register.valor}</td>
                     </tr>
                 
                     <tr class="color-gray-light total">
@@ -462,13 +516,13 @@ const createTableRowsTree = (arr) => {
     for (const obj of arr[0].file.register) {
         row = `
             <tr>
-                <td class="data">${obj.data}</td>
-                <td class="placa" contenteditable="true"></td>
-                <td class="num-doc" contenteditable="true">${(arr[1] == "OC" ? '' : obj.documento)}</td>
-                <td class="material">${obj.descricao.replace("/", "")}</td>
-                <td class="quantidade">${obj.quantidade}</td>
-                <td class="valor-unitario">R$${obj.unitario}</td>
-                <td class="valor">R$${obj.valor}</td>
+                <td>${obj.data}</td>
+                <td contenteditable="true"></td>
+                <td contenteditable="true">${(arr[1] == "OC" ? '' : obj.documento)}</td>
+                <td>${obj.descricao.replace("/", "")}</td>
+                <td>${obj.quantidade}</td>
+                <td>R$${obj.unitario}</td>
+                <td>R$${obj.valor}</td>
             </tr>
         `;
 
