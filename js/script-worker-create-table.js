@@ -1,6 +1,14 @@
 onmessage = function (e) {
     const result = e.data;
 
+    if (result[0].file) {
+        if(result[0].file.register[0] === undefined) {
+            let arr = [];
+            arr.push(result[0].file.register);
+            result[0].file.register = arr;
+        }
+    }
+
     switch (result[2]) {
         case '1':
             postMessage(createTableRowsOne(result));
@@ -33,7 +41,6 @@ const createReportNFe = (arr) => {
 
     table = `
         <table class="table2">
-
                 <tr class="trThhead">
                     <th><strong>DATA</strong></th>
                     <th><strong>NFe</strong></th>
@@ -44,7 +51,7 @@ const createReportNFe = (arr) => {
             <tbody id="itens-table">`;
 
     for (const obj of arr[0].enviNFe.nfeProc) {
-        row = `
+        row += `
             <tr>
                 <td class="data">${obj.NFe.infNFe.ide.dhEmi.split('T')[0]}</td>
                 <td class="nfe">${obj.NFe.infNFe.ide.nNF}</td>
@@ -53,12 +60,11 @@ const createReportNFe = (arr) => {
             </tr>
         `;
 
-        table += row;
         total += parseFloat(obj.NFe.infNFe.pag.detPag.vPag);
         totalTon += parseFloat(obj.quantidade);
     }
 
-    row = `
+    row += `
             <tr class="color-gray-light total total2">
                 <td id="total"><strong>TOTAL</strong></td>
                 <td></td>
@@ -80,57 +86,6 @@ const createTableRowsOne = (arr) => {
     var total = 0;
     var totalTon = 0;
     var objDate = {};
-
-
-    if (arr[0].file.register[0] === undefined) {
-        total = parseFloat(arr[0].file.register.valor);
-        table = `
-            <table class="table2">
-                <thead class="table-head">
-
-                    <strong class="date" contenteditable="true">${arr[0].file.register.data}</strong>
-
-                    <tr class="color-gray">
-                        <th><strong>MOTORISTA</strong></th>
-                        <th><strong>PLACA</strong></th>
-                        <th><strong>DESTINO</strong></th>
-                        <th contenteditable="true"><strong>${arr[1]}</strong></th>
-                        <th><strong>MATERIAL</strong></th>
-                        <th><strong>QUANTIDADE(TON)</strong></th>
-                        <th><strong>VALOR DO MATERIAL</strong></th>
-                        <th><strong>TOTAL</strong></th>
-                    </tr>
-                </thead>
-
-                <tbody id="itens-table">
-            
-                    <tr>
-                        <td contenteditable="true"></td>
-                        <td contenteditable="true"></td>
-                        <td contenteditable="true"></td>
-                        <td contenteditable="true">${(arr[1] == "OC" ? '' : arr[0].file.register.documento)}</td>
-                        <td>${arr[0].file.register.descricao.replace("/", "")}</td>
-                        <td>${arr[0].file.register.quantidade}</td>
-                        <td>R$${arr[0].file.register.unitario}</td>
-                        <td>R$${arr[0].file.register.valor}</td>
-                    </tr>
-                
-                    <tr class="color-gray-light total">
-                        <td id="total"><strong>TOTAL</strong></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td>${arr[0].file.register.quantidade}</td>
-                        <td></td>
-                        <td>R$${total.toFixed(2)}</td>
-                    </tr>
-                </tbody>
-            </table>
-        `;
-
-        return table;
-    }
 
     for (var i = 0; i < arr[0].file.register.length; ++i) {
         if (!objDate.hasOwnProperty(arr[0].file.register[i].data)) {
@@ -224,48 +179,6 @@ const createTableRowsOnev2 = (arr) => {
     var totalTon = 0;
     var objDate = {};
 
-
-    if (arr[0].file.register[0] === undefined) {
-        total = parseFloat(arr[0].file.register.valor);
-        table = `
-            <table class="table2">
-                <thead class="table-head">
-
-                    <strong class="date" contenteditable="true">${arr[0].file.register.data}</strong>
-
-                    <tr class="color-gray">
-                        <th contenteditable="true"><strong>${arr[1]}</strong></th>
-                        <th><strong>MATERIAL</strong></th>
-                        <th><strong>QUANTIDADE(TON)</strong></th>
-                        <th><strong>VALOR DO MATERIAL</strong></th>
-                        <th><strong>TOTAL</strong></th>
-                    </tr>
-                </thead>
-
-                <tbody id="itens-table">
-            
-                    <tr>
-                        <td contenteditable="true">${(arr[1] == "OC" ? '' : arr[0].file.register.documento)}</td>
-                        <td>${arr[0].file.register.descricao.replace("/", "")}</td>
-                        <td>${arr[0].file.register.quantidade}</td>
-                        <td>R$${arr[0].file.register.unitario}</td>
-                        <td>R$${arr[0].file.register.valor}</td>
-                    </tr>
-                
-                    <tr class="color-gray-light total">
-                        <td id="total"><strong>TOTAL</strong></td>
-                        <td></td>
-                        <td>${arr[0].file.register.quantidade}</td>
-                        <td></td>
-                        <td>R$${total.toFixed(2)}</td>
-                    </tr>
-                </tbody>
-            </table>
-        `;
-
-        return table;
-    }
-
     for (var i = 0; i < arr[0].file.register.length; ++i) {
         if (!objDate.hasOwnProperty(arr[0].file.register[i].data)) {
             objDate[arr[0].file.register[i].data] = [];
@@ -335,57 +248,6 @@ const createTableRowsTwo = (arr) => {
     var row = '';
     var total = 0;
     var totalTon = 0;
-
-
-    if (arr[0].file.register[0] === undefined) {
-        total = parseFloat(arr[0].file.register.valor);
-        table = `
-            <table class="table2">
-                <thead class="table-head">
-                    <tr class="color-gray">
-                        <th><strong>DATA</strong></th>
-                        <th><strong>MOTORISTA</strong></th>
-                        <th><strong>PLACA</strong></th>
-                        <th><strong>DESTINO</strong></th>
-                        <th contenteditable="true"><strong>${arr[1]}</strong></th>
-                        <th><strong>MATERIAL</strong></th>
-                        <th><strong>QUANTIDADE(TON)</strong></th>
-                        <th><strong>VALOR DO MATERIAL</strong></th>
-                        <th><strong>TOTAL</strong></th>
-                    </tr>
-                </thead>
-
-                <tbody id="itens-table">
-            
-                    <tr>
-                        <td>${arr[0].file.register.data}</td>
-                        <td contenteditable="true"></td>
-                        <td contenteditable="true"></td>
-                        <td contenteditable="true"></td>
-                        <td contenteditable="true">${(arr[1] == "OC" ? '' : arr[0].file.register.documento)}</td>
-                        <td>${arr[0].file.register.descricao.replace("/", "")}</td>
-                        <td>${arr[0].file.register.quantidade}</td>
-                        <td>R$${arr[0].file.register.unitario}</td>
-                        <td>R$${arr[0].file.register.valor}</td>
-                    </tr>
-                
-                    <tr class="color-gray-light total">
-                        <td id="total"><strong>TOTAL</strong></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td>${arr[0].file.register.quantidade}</td>
-                        <td></td>
-                        <td>R$${total.toFixed(2)}</td>
-                    </tr>
-                </tbody>
-            </table>
-        `;
-
-        return table;
-    }
 
     table = `
         <table class="table2">
