@@ -1,7 +1,6 @@
 onmessage = function (e) {
     const result = e.data;
 
-    console.log(result)
     switch (result[2]) {
         case '1':
             postMessage(createTableRowsOne(result));
@@ -20,13 +19,13 @@ onmessage = function (e) {
         case 'Relatório NFe':
             postMessage(createReportNFe(result));
             break;
+        case 'Relatório Material':
+            postMessage(createReportMaterial(result));
+            break;
     }
 }
 
 const createReportNFe = (arr) => {
-    console.log(arr[0].enviNFe.nfeProc)
-    console.log(arr[0].enviNFe.nfeProc[0].NFe.infNFe.ide.nNF)
-
     var table = '';
     var row = '';
     var total = 0;
@@ -217,8 +216,6 @@ const createTableRowsOne = (arr) => {
     return tables;
 }
 
-//-------------------------------------------------------------------------------------------//
-
 const createTableRowsOnev2 = (arr) => {
     var table = '';
     var tables = '';
@@ -333,8 +330,6 @@ const createTableRowsOnev2 = (arr) => {
     return tables;
 }
 
-//-------------------------------------------------------------------------------------------//
-
 const createTableRowsTwo = (arr) => {
     var table = '';
     var row = '';
@@ -445,12 +440,9 @@ const createTableRowsTwo = (arr) => {
         `;
     table += row;
     table += `</tbody></table>`;
-    console.log(table)
 
     return table;
 }
-
-//-------------------------------------------------------------------------------------------//
 
 const createTableRowsTree = (arr) => {
     var table = '';
@@ -544,7 +536,65 @@ const createTableRowsTree = (arr) => {
         `;
     table += row;
     table += `</tbody></table>`;
-    console.log(table)
+
+    return table;
+}
+
+const createReportMaterial = (arr) => {
+    var table = '';
+    var row = '';
+    var totalPrice = 0;
+    var totalTon = 0;
+    var objMaterial = {};
+
+    for (var i = 0; i < arr[0].file.register.length; ++i) {
+        if (!objMaterial.hasOwnProperty(arr[0].file.register[i].descricao)) {
+            objMaterial[arr[0].file.register[i].descricao] = {};
+            objMaterial[arr[0].file.register[i].descricao].totalWeightQuantity = parseFloat(arr[0].file.register[i].quantidade);
+            objMaterial[arr[0].file.register[i].descricao].totalPriceCharged = parseFloat(arr[0].file.register[i].Total);
+        } else {
+            objMaterial[arr[0].file.register[i].descricao].totalWeightQuantity += parseFloat(arr[0].file.register[i].quantidade);
+            objMaterial[arr[0].file.register[i].descricao].totalPriceCharged += parseFloat(arr[0].file.register[i].Total);
+        }
+    }
+
+    table = `
+        <table class="table2">
+            <thead class="table-head">
+                <tr class="color-gray">
+                    <th><strong>MATERIAL</strong></th>
+                    <th><strong>QUANTIDADE TOTAL(TON)</strong></th>
+                    <th><strong>VALOR TOTAL DO MATERIAL</strong></th>
+                </tr>
+            </thead>
+
+        <tbody id="itens-table">`
+
+    Object.keys(objMaterial).forEach((key) => {
+        row += `
+            <tr>
+                <td>${key.replace("/", "")}</td>
+                <td>${objMaterial[key].totalWeightQuantity.toFixed(2)}</td>
+                <td>R$${objMaterial[key].totalPriceCharged.toFixed(2)}</td>
+            </tr>
+        `;
+
+        totalPrice += objMaterial[key].totalPriceCharged;
+        totalTon += objMaterial[key].totalWeightQuantity;
+
+    })
+
+    row += `
+            <tr class="color-gray-light total">
+                <td id="total"><strong>TOTAL</strong></td>
+                <td>${totalTon.toFixed(2)}</td>
+                <td>R$${totalPrice.toFixed(2)}</td>
+            </tr>
+        `;
+
+        totalPrice = 0;
+        table += row;
+        table += `</tbody></table>`
 
     return table;
 }

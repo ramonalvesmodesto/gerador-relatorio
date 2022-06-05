@@ -62,10 +62,14 @@ function createTableEditable(json) {
         arr.push(json);
         arr.push(valueModel);
         arr.push(valueModelReport);
-        console.log(arr)
 
-        if(arr[2] == 'Relatório NFe') {
-            document.getElementsByClassName("title")[0].innerHTML = 'Relatório de vendas JMX'
+        switch(arr[2]) {
+            case 'Relatório NFe':
+                document.getElementsByClassName("title")[0].innerHTML = 'Relatório de vendas JMX';
+                break
+            case 'Relatório Material':
+                document.getElementsByClassName("title")[0].innerHTML = 'Relatório Material';
+                break;
         }
 
         worker.postMessage(arr);
