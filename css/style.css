@@ -13,9 +13,10 @@ body {
 }
 
 #logo {
-    background-color: var(--color-document-blue);
-    color: white;
+    color: #222;
     border-radius: 5px;
+    border: 1px solid #222;
+    margin-bottom: 10px;
 }
 
 #head-doc {
@@ -27,20 +28,13 @@ body {
     margin-bottom: 32px;
 }
 
-.color-gray, .table2 tbody .trThhead {
-    background-color: #555;
-    color: white;
-}
-
-.color-gray2 {
-    background-color: #333;
-    color: white;
+.color-gray, .color-gray2, .table2 tbody .trThhead {
+    background-color: #b1aeae;
 }
 
 
 tr .color-gray {
-    background-color: #555;
-    color: white;
+    background-color: #b1aeae;
 }
 
 .color-gray:nth-child(7), .total td:nth-child(1) {
@@ -69,8 +63,7 @@ td, tr, th {
 }
 
 .table2 tbody tr.total td {
-    background-color: #666;
-    color: white;
+    background-color: #b1aeae;
 }
 
 .table2, .table2 tr, .table2 th, .table2 td {
@@ -80,16 +73,6 @@ td, tr, th {
 .table2 th, .table2 td   {
     text-align: center;
 }
-
-/* .table tbody tr:nth-of-type(odd) {
-    background-color: #5DADE2;
-    color: white;
-}
-
-.table tbody tr:nth-of-type(even) {
-    background-color: #5dade293;
-    color: white;
-} */
 
 .table2 tbody tr {
     background-color: rgb(240, 240, 240);
@@ -147,8 +130,7 @@ td, tr, th {
     position: relative;
     text-align: center;
     padding: 10px;
-    background-color: #333;
-    color: white;
+    background-color: #d1d0d0;
     font-size: 14px;
     font-weight: 900;
     border-radius: 5px 5px 0 0;
@@ -166,26 +148,5 @@ td, tr, th {
     size: auto;
     margin: 15mm;
 }
-
-/* @media print {
-    html, body {
-        font-size: 12px;   
-    }
-
-    h5 {
-        font-size: 18px;
-    }
-    
-    .container {
-        margin: 0;
-        border: initial;
-        border-radius: initial;
-        width: initial;
-        min-height: initial;
-        box-shadow: initial;
-        background: initial;
-        page-break-after: always;
-    }
-} */
 
 
