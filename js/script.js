@@ -36,7 +36,7 @@ function createTableEditable(json) {
     var content = `
             <div class="content"> 
                 <div id="head-doc">
-                    <p>Gerado em: https://ramonalvesmodesto.github.io/gerador-relatorio-jmx/</p>
+                    <p>Gerado em: https://ramonalvesmodesto.github.io/gerador-relatorio/</p>
                     <p>${date.toLocaleString()}</p>
                 </div>
             </div>
