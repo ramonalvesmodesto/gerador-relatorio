@@ -42,7 +42,7 @@ function createTableEditable(json) {
             </div>
 
             <div id="logo">
-                <img id="jmx" src="https://ramonalvesmodesto.github.io/gerador-relatorio-jmx/img/logomarca1.png">
+                <img id="jmx" src="https://ramonalvesmodesto.github.io/gerador-relatorio/img/logomarca1.png">
                 <h5 class="title" contenteditable="true">CARREGAMENTO</h5>
             </div>
             <div id="div-table">
