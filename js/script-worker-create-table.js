@@ -103,8 +103,8 @@ const createTableRowsOne = (arr) => {
                 <thead class="table-head">
 
                     <div class="head-date-nfe">
-                        <strong>${key}</strong>
-                        <strong contenteditable="true">NFe</strong>
+                        <strong>DATA: ${key}</strong>
+                        <strong contenteditable="true">NFe:</strong>
                     </div>
 
                     <tr class="color-gray">
