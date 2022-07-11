@@ -152,16 +152,6 @@ const createTableRowsOne = (arr) => {
                 <td></td>
                 <td>R$${total.toFixed(2)}</td>
             </tr>
-
-            <tr class="nfe">
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td class="color-gray" contenteditable="true"></td>
-            </tr>
         `;
 
         total = 0;
