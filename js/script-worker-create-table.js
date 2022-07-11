@@ -103,6 +103,7 @@ const createTableRowsOne = (arr) => {
                 <thead class="table-head">
 
                     <strong class="date">${key}</strong>
+                    <strong class="nf">NFe</strong>
 
                     <tr class="color-gray">
                         <th><strong>MOTORISTA</strong></th>
@@ -157,7 +158,6 @@ const createTableRowsOne = (arr) => {
                 <td></td>
                 <td></td>
                 <td></td>
-                <td class="color-gray" contenteditable="true"><strong>NFe</strong></td>
                 <td class="color-gray" contenteditable="true"></td>
             </tr>
         `;
