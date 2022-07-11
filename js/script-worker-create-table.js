@@ -102,8 +102,10 @@ const createTableRowsOne = (arr) => {
             <table class="table2">
                 <thead class="table-head">
 
-                    <strong class="date">${key}</strong>
-                    <strong class="nf">NFe</strong>
+                    <div class="head-date-nfe">
+                        <strong>${key}</strong>
+                        <strong>NFe</strong>
+                    </div>
 
                     <tr class="color-gray">
                         <th><strong>MOTORISTA</strong></th>
