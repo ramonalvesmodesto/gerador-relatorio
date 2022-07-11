@@ -104,7 +104,7 @@ const createTableRowsOne = (arr) => {
 
                     <div class="head-date-nfe">
                         <strong>${key}</strong>
-                        <strong>NFe</strong>
+                        <strong contenteditable="true">NFe</strong>
                     </div>
 
                     <tr class="color-gray">
