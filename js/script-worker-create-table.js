@@ -304,52 +304,11 @@ const createTableRowsTree = (arr) => {
     var total = 0;
     var totalTon = 0;
 
-
-    if (arr[0].file.register[0] === undefined) {
-        total = parseFloat(arr[0].file.register.valor);
-        table = `
-            <table class="table2">
-                <thead class="table-head">
-                    <tr class="color-gray">
-                        <th><strong>DATA</strong></th>
-                        <th><strong>MATERIAL</strong></th>
-                        <th><strong>QUANTIDADE(TON)</strong></th>
-                        <th><strong>VALOR DO MATERIAL</strong></th>
-                        <th><strong>TOTAL</strong></th>
-                    </tr>
-                </thead>
-
-                <tbody id="itens-table">
-            
-                    <tr>
-                        <td>${arr[0].file.register.data}</td>
-                        <td>${arr[0].file.register.descricao.replace("/", "")}</td>
-                        <td>${arr[0].file.register.quantidade}</td>
-                        <td>R$${arr[0].file.register.unitario}</td>
-                        <td>R$${arr[0].file.register.valor}</td>
-                    </tr>
-                
-                    <tr class="color-gray-light total">
-                        <td id="total"><strong>TOTAL</strong></td>
-                        <td></td>
-                        <td>${arr[0].file.register.quantidade}</td>
-                        <td></td>
-                        <td>R$${total.toFixed(2)}</td>
-                    </tr>
-                </tbody>
-            </table>
-        `;
-
-        return table;
-    }
-
     table = `
         <table class="table2">
             <thead class="table-head">
                 <tr class="color-gray2">
                     <th><strong>DATA</strong></th>
-                    <th><strong>PLACA</strong></th>
-                    <th contenteditable="true"><strong>${arr[1]}</strong></th>
                     <th><strong>MATERIAL</strong></th>
                     <th><strong>QUANTIDADE(TON)</strong></th>
                     <th><strong>VALOR DO MATERIAL</strong></th>
@@ -363,8 +322,6 @@ const createTableRowsTree = (arr) => {
         row = `
             <tr>
                 <td>${obj.data}</td>
-                <td contenteditable="true"></td>
-                <td contenteditable="true">${(arr[1] == "OC" ? '' : obj.documento)}</td>
                 <td>${obj.descricao.replace("/", "")}</td>
                 <td>${obj.quantidade}</td>
                 <td>R$${obj.unitario}</td>
@@ -380,8 +337,6 @@ const createTableRowsTree = (arr) => {
     row = `
             <tr class="color-gray-light total total2">
                 <td id="total"><strong>TOTAL</strong></td>
-                <td></td>
-                <td></td>
                 <td></td>
                 <td>${totalTon.toFixed(2)}</td>
                 <td></td>
