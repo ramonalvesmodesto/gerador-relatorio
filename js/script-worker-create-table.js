@@ -335,7 +335,7 @@ const createTableRowsTree = (arr) => {
     }
 
     row = `
-            <tfoot>
+            <tfoot class="color-gray2">
                 <tr class="color-gray-light total total2">
                     <td id="total"><strong>TOTAL</strong></td>
                     <td></td>
