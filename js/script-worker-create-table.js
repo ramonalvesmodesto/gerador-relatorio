@@ -335,13 +335,15 @@ const createTableRowsTree = (arr) => {
     }
 
     row = `
-            <tr class="color-gray-light total total2">
-                <td id="total"><strong>TOTAL</strong></td>
-                <td></td>
-                <td>${totalTon.toFixed(2)}</td>
-                <td></td>
-                <td>R$${total.toFixed(2)}</td>
-            </tr>
+            <tfoot>
+                <tr class="color-gray-light total total2">
+                    <td id="total"><strong>TOTAL</strong></td>
+                    <td></td>
+                    <td>${totalTon.toFixed(2)}</td>
+                    <td></td>
+                    <td>R$${total.toFixed(2)}</td>   
+                </tr>
+            </tfoot>
         `;
     table += row;
     table += `</tbody></table>`;
