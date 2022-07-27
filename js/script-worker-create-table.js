@@ -2,7 +2,7 @@ onmessage = function (e) {
     const result = e.data;
 
     if (result[0].file) {
-        if(result[0].file.register[0] === undefined) {
+        if (result[0].file.register[0] === undefined) {
             let arr = [];
             arr.push(result[0].file.register);
             result[0].file.register = arr;
@@ -10,76 +10,41 @@ onmessage = function (e) {
     }
 
     switch (result[2]) {
-        case '1':
-            postMessage(createTableRowsOne(result));
+        case 'Relatório Por Data V1':
+            postMessage(createReportForDataV1(result));
             break;
 
-        case '2':
-            postMessage(createTableRowsTwo(result));
+        case 'Relatório Por Data V2':
+            postMessage(createReportForDataV2(result));
             break;
 
-        case '3':
-            postMessage(createTableRowsTree(result));
+        case 'Relatório Unificado V1':
+            postMessage(createReportOnlyV1(result));
             break;
-        case '4':
-            postMessage(createTableRowsOnev2(result));
+
+        case 'Relatório Unificado V2':
+            postMessage(createReportOnlyV2(result));
             break;
+
+        case 'Relatório Unificado V3':
+            postMessage(createReportOnlyV3(result));
+            break;
+
         case 'Relatório NFe':
             postMessage(createReportNFe(result));
             break;
+
+        case 'Relatório NFe Anual':
+            postMessage(createReportNFeYearly(result));
+            break;
+
         case 'Relatório Material':
             postMessage(createReportMaterial(result));
             break;
     }
 }
 
-const createReportNFe = (arr) => {
-    var table = '';
-    var row = '';
-    var total = 0;
-    var totalTon = 0;
-
-    table = `
-        <table class="table2">
-                <tr class="trThhead">
-                    <th><strong>DATA</strong></th>
-                    <th><strong>NFe</strong></th>
-                    <th><strong>VALOR</strong></th>
-                    <th><strong>CLIENTES</strong></th>
-                </tr>
-
-            <tbody id="itens-table">`;
-
-    for (const obj of arr[0].enviNFe.nfeProc) {
-        row += `
-            <tr>
-                <td class="data">${obj.NFe.infNFe.ide.dhEmi.split('T')[0]}</td>
-                <td class="nfe">${obj.NFe.infNFe.ide.nNF}</td>
-                <td class="valor">${obj.NFe.infNFe.pag.detPag.vPag}</td>
-                <td class="conta">${obj.NFe.infNFe.dest.xNome.split(' ')[0]}</td>
-            </tr>
-        `;
-
-        total += parseFloat(obj.NFe.infNFe.pag.detPag.vPag);
-        totalTon += parseFloat(obj.quantidade);
-    }
-
-    row += `
-            <tr class="color-gray-light total total2">
-                <td id="total"><strong>TOTAL</strong></td>
-                <td></td>
-                <td>R$${total.toFixed(2)}</td>
-                <td></td>
-            </tr>
-        `;
-    table += row;
-    table += `</tbody></table>`;
-
-    return table;
-    
-}
-
-const createTableRowsOne = (arr) => {
+const createReportForDataV1 = (arr) => {
     var table = '';
     var tables = '';
     var row = '';
@@ -142,16 +107,18 @@ const createTableRowsOne = (arr) => {
         }
 
         row = `
-            <tr class="color-gray-light total">
-                <td id="total"><strong>TOTAL</strong></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td>${totalTon.toFixed(2)}</td>
-                <td></td>
-                <td>R$${total.toFixed(2)}</td>
-            </tr>
+            <tfoot class="color-gray2">
+                <tr class="color-gray-light total">
+                    <td id="total"><strong>TOTAL</strong></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>${totalTon.toFixed(2)}</td>
+                    <td></td>
+                    <td>R$${total.toFixed(2)}</td>
+                </tr>
+            </tfoot>
         `;
 
         total = 0;
@@ -163,7 +130,7 @@ const createTableRowsOne = (arr) => {
     return tables;
 }
 
-const createTableRowsOnev2 = (arr) => {
+const createReportForDataV2 = (arr) => {
     var table = '';
     var tables = '';
     var row = '';
@@ -217,13 +184,15 @@ const createTableRowsOnev2 = (arr) => {
         }
 
         row = `
-            <tr class="color-gray-light total">
-                <td id="total"><strong>TOTAL</strong></td>
-                <td></td>
-                <td>${totalTon.toFixed(2)}</td>
-                <td></td>
-                <td>R$${total.toFixed(2)}</td>
-            </tr>
+            <tfoot class="color-gray2">
+                <tr class="color-gray-light total">
+                    <td id="total"><strong>TOTAL</strong></td>
+                    <td></td>
+                    <td>${totalTon.toFixed(2)}</td>
+                    <td></td>
+                    <td>R$${total.toFixed(2)}</td>
+                </tr>
+            </tfoot>
         `;
 
         total = 0;
@@ -235,7 +204,7 @@ const createTableRowsOnev2 = (arr) => {
     return tables;
 }
 
-const createTableRowsTwo = (arr) => {
+const createReportOnlyV1 = (arr) => {
     var table = '';
     var row = '';
     var total = 0;
@@ -280,17 +249,19 @@ const createTableRowsTwo = (arr) => {
     }
 
     row = `
-            <tr class="color-gray-light total total2">
-                <td id="total"><strong>TOTAL</strong></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td>${totalTon.toFixed(2)}</td>
-                <td></td>
-                <td>R$${total.toFixed(2)}</td>
-            </tr>
+            <tfoot class="color-gray2">
+                <tr class="color-gray-light total total2">
+                    <td id="total"><strong>TOTAL</strong></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>${totalTon.toFixed(2)}</td>
+                    <td></td>
+                    <td>R$${total.toFixed(2)}</td>
+                </tr>
+            </tfoot>
         `;
     table += row;
     table += `</tbody></table>`;
@@ -298,7 +269,7 @@ const createTableRowsTwo = (arr) => {
     return table;
 }
 
-const createTableRowsTree = (arr) => {
+const createReportOnlyV2 = (arr) => {
     var table = '';
     var row = '';
     var total = 0;
@@ -342,6 +313,237 @@ const createTableRowsTree = (arr) => {
                     <td>${totalTon.toFixed(2)}</td>
                     <td></td>
                     <td>R$${total.toFixed(2)}</td>   
+                </tr>
+            </tfoot>
+        `;
+    table += row;
+    table += `</tbody></table>`;
+
+    return table;
+}
+
+const createReportOnlyV3 = (arr) => {
+    var table = '';
+    var row = '';
+    var total = 0;
+    var totalTon = 0;
+
+    table = `
+        <table class="table2">
+            <thead class="table-head">
+                <tr class="color-gray2">
+                    <th><strong>DATA</strong></th>
+                    <th contenteditable="true"><strong>${arr[1]}</strong></th>
+                    <th><strong>MATERIAL</strong></th>
+                    <th><strong>QUANTIDADE(TON)</strong></th>
+                    <th><strong>VALOR DO MATERIAL</strong></th>
+                    <th><strong>TOTAL</strong></th>
+                </tr>
+            </thead>
+
+            <tbody id="itens-table">`;
+
+    for (const obj of arr[0].file.register) {
+        row = `
+            <tr>
+                <td>${obj.data}</td>
+                <td contenteditable="true">${(arr[1] == "OC" ? '' : obj.documento)}</td>
+                <td>${obj.descricao.replace("/", "")}</td>
+                <td>${obj.quantidade}</td>
+                <td>R$${obj.unitario}</td>
+                <td>R$${obj.valor}</td>
+            </tr>
+        `;
+
+        table += row;
+        total += parseFloat(obj.valor);
+        totalTon += parseFloat(obj.quantidade);
+    }
+
+    row = `
+            <tfoot class="color-gray2">
+                <tr class="color-gray-light total total2">
+                    <td id="total"><strong>TOTAL</strong></td>
+                    <td></td>
+                    <td></td>
+                    <td>${totalTon.toFixed(2)}</td>
+                    <td></td>
+                    <td>R$${total.toFixed(2)}</td>
+                </tr>
+            </tfoot>
+        `;
+    table += row;
+    table += `</tbody></table>`;
+
+    return table;
+}
+
+const createReportNFe = (arr) => {
+    var table = '';
+    var row = '';
+    var total = 0;
+    var totalTon = 0;
+
+    table = `
+        <table class="table2">
+            <thead class="table-head">
+                <tr class="color-gray2">
+                    <th><strong>DATA</strong></th>
+                    <th><strong>NFe</strong></th>
+                    <th><strong>QUANTIDADE (TON)</strong></th>
+                    <th><strong>VALOR</strong></th>
+                    <th><strong>CLIENTES</strong></th>
+                </tr>
+            </thead>
+
+            <tbody id="itens-table">`;
+
+    for (const obj of arr[0].enviNFe.nfeProc) {
+        let amount = 0.0;
+
+        if (obj.NFe.infNFe.det.hasOwnProperty("prod")) {
+            amount = parseFloat(obj.NFe.infNFe.det.prod.qCom);
+        } else {
+            obj.NFe.infNFe.det.forEach(a => {
+                amount += parseFloat(a.prod.qCom);
+            })
+        }
+
+        row += `
+            <tr>
+                <td class="data">${obj.NFe.infNFe.ide.dhEmi.split('T')[0]}</td>
+                <td class="nfe">${obj.NFe.infNFe.ide.nNF}</td>
+                <td class="nfe">${amount.toFixed(2)}</td>
+                <td class="valor">${obj.NFe.infNFe.pag.detPag.vPag}</td>
+                <td class="conta">${obj.NFe.infNFe.dest.xNome.split(' ')[0]}</td>
+            </tr>
+        `;
+
+        total += parseFloat(obj.NFe.infNFe.total.ICMSTot.vNF);
+        totalTon += amount;
+    }
+
+    row += `
+            <tfoot class="color-gray2">
+                <tr class="color-gray-light total total2">
+                    <td id="total"><strong>TOTAL</strong></td>
+                    <td></td>
+                    <td>${totalTon.toFixed(2)}</td>
+                    <td>R$${total.toFixed(2)}</td>
+                    <td></td>
+                </tr>
+            </tfoot>
+        `;
+    table += row;
+    table += `</tbody></table>`;
+
+    return table;
+
+}
+
+const createReportNFeYearly = (arr) => {
+    const months = {
+        '01': "Janeiro",
+        '02': "Fevereiro",
+        '03': "Março",
+        '04': "Abril",
+        '05': "Maio",
+        '06': "Junho",
+        '07': "Julho",
+        '08': "Agosto",
+        '09': "Setembro",
+        '10': "Outubro",
+        '11': "Novembro",
+        '12': "Dezembro"
+    }
+    const objMonth = {};
+    const objMonthsInfo = {};
+
+    for (const obj of arr[0].enviNFe.nfeProc) {
+        const dateHour = obj.NFe.infNFe.ide.dhEmi.split('T');
+        const month = dateHour[0].split('-')[1];
+
+        if (objMonth.hasOwnProperty(month)) {
+            objMonth[month].push(obj);
+        } else {
+            objMonth[month] = [];
+            objMonth[month].push(obj)
+        }
+    }
+
+    Object.keys(objMonth).forEach(key => {
+        const objData = {
+            amount: 0.0,
+            valueMoney: 0.0
+        }
+
+        objMonth[key].forEach(obj => {
+            let amount = 0.0;
+
+            if (obj.NFe.infNFe.det.hasOwnProperty("prod")) {
+                amount = parseFloat(obj.NFe.infNFe.det.prod.qCom);
+            } else {
+                obj.NFe.infNFe.det.forEach(a => {
+                    amount += parseFloat(a.prod.qCom);
+                })
+            }
+
+            objData.amount += amount;
+            objData.valueMoney += parseFloat(obj.NFe.infNFe.total.ICMSTot.vNF);
+        })
+
+        if (!objMonthsInfo.hasOwnProperty(key)) {
+            objMonthsInfo[key] = [];
+        }
+
+        objMonthsInfo[key] = objData;
+    });
+
+    var table = '';
+    var row = '';
+    var totalAmount = 0;
+    var totalValueMoney = 0;
+
+    table = `
+        <table class="table2">
+            <thead class="table-head">
+                <tr class="color-gray2">
+                    <th><strong>MÊS</strong></th>
+                    <th><strong>QUANTIDADE (TON)</strong></th>
+                    <th><strong>VALOR</strong></th>
+                </tr>
+            </thead>
+
+            <tbody id="itens-table">`;
+
+    for (let i = 1; i <= 12; i++) {
+        let num = "";
+
+        if (i < 10) {
+            num = "0" + i.toString();
+        } else {
+            num = i.toString();
+        }
+
+        row += `
+            <tr>
+                <td class="mes">${months[num]}</td>
+                <td class="quantidade">${objMonthsInfo[num].amount.toFixed(2)}</td>
+                <td class="valor">R$${objMonthsInfo[num].valueMoney.toFixed(2)}</td>
+            </tr>
+        `;
+
+        totalAmount += objMonthsInfo[num].amount;
+        totalValueMoney += objMonthsInfo[num].valueMoney
+
+    }
+
+    row += `
+            <tfoot class="color-gray2">
+                <tr class="color-gray-light total total2">
+                    <td><strong>TOTAL</strong></td>
+                    <td>${totalAmount.toFixed(2)}</td>
+                    <td>R$${totalValueMoney.toFixed(2)}</td>
                 </tr>
             </tfoot>
         `;
@@ -396,16 +598,18 @@ const createReportMaterial = (arr) => {
     })
 
     row += `
-            <tr class="color-gray-light total">
-                <td id="total"><strong>TOTAL</strong></td>
-                <td>${totalTon.toFixed(2)}</td>
-                <td>R$${totalPrice.toFixed(2)}</td>
-            </tr>
+            <tfoot class="color-gray2">
+                <tr class="color-gray-light total">
+                    <td id="total"><strong>TOTAL</strong></td>
+                    <td>${totalTon.toFixed(2)}</td>
+                    <td>R$${totalPrice.toFixed(2)}</td>
+                </tr>
+            </tfoot>
         `;
 
-        totalPrice = 0;
-        table += row;
-        table += `</tbody></table>`
+    totalPrice = 0;
+    table += row;
+    table += `</tbody></table>`
 
     return table;
 }

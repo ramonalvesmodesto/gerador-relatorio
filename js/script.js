@@ -64,10 +64,13 @@ function createTableEditable(json) {
         arr.push(valueModel);
         arr.push(valueModelReport);
 
-        switch(arr[2]) {
+        switch (arr[2]) {
             case 'Relatório NFe':
                 document.getElementsByClassName("title")[0].innerHTML = 'Relatório de vendas JMX';
                 break
+            case 'Relatório NFe Anual':
+                document.getElementsByClassName("title")[0].innerHTML = 'Relatório fiscal anual';
+                break;
             case 'Relatório Material':
                 document.getElementsByClassName("title")[0].innerHTML = 'Relatório Material';
                 break;
