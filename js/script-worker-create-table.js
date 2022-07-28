@@ -30,6 +30,10 @@ onmessage = function (e) {
             postMessage(createReportOnlyV3(result));
             break;
 
+        case 'Relatório Fiscal Por Cliente':
+            postMessage(createReportNFeForClient(result));
+            break;
+
         case 'Relatório NFe':
             postMessage(createReportNFe(result));
             break;
@@ -402,10 +406,10 @@ const createReportNFe = (arr) => {
         let amount = 0.0;
 
         if (obj.NFe.infNFe.det.hasOwnProperty("prod")) {
-            amount = parseFloat(obj.NFe.infNFe.det.prod.qCom);
+            amount = Number(obj.NFe.infNFe.det.prod.qCom);
         } else {
             obj.NFe.infNFe.det.forEach(a => {
-                amount += parseFloat(a.prod.qCom);
+                amount += Number(a.prod.qCom);
             })
         }
 
@@ -415,11 +419,11 @@ const createReportNFe = (arr) => {
                 <td class="nfe">${obj.NFe.infNFe.ide.nNF}</td>
                 <td class="nfe">${amount.toFixed(2)}</td>
                 <td class="valor">${obj.NFe.infNFe.pag.detPag.vPag}</td>
-                <td class="conta">${obj.NFe.infNFe.dest.xNome.split(' ')[0]}</td>
+                <td class="conta">${obj.NFe.infNFe.dest.xNome}</td>
             </tr>
         `;
 
-        total += parseFloat(obj.NFe.infNFe.total.ICMSTot.vNF);
+        total += Number(obj.NFe.infNFe.total.ICMSTot.vNF);
         totalTon += amount;
     }
 
@@ -481,15 +485,15 @@ const createReportNFeYearly = (arr) => {
             let amount = 0.0;
 
             if (obj.NFe.infNFe.det.hasOwnProperty("prod")) {
-                amount = parseFloat(obj.NFe.infNFe.det.prod.qCom);
+                amount = Number(obj.NFe.infNFe.det.prod.qCom);
             } else {
                 obj.NFe.infNFe.det.forEach(a => {
-                    amount += parseFloat(a.prod.qCom);
+                    amount += Number(a.prod.qCom);
                 })
             }
 
             objData.amount += amount;
-            objData.valueMoney += parseFloat(obj.NFe.infNFe.total.ICMSTot.vNF);
+            objData.valueMoney += Number(obj.NFe.infNFe.total.ICMSTot.vNF);
         })
 
         if (!objMonthsInfo.hasOwnProperty(key)) {
@@ -544,6 +548,80 @@ const createReportNFeYearly = (arr) => {
                     <td><strong>TOTAL</strong></td>
                     <td>${totalAmount.toFixed(2)}</td>
                     <td>R$${totalValueMoney.toFixed(2)}</td>
+                </tr>
+            </tfoot>
+        `;
+    table += row;
+    table += `</tbody></table>`;
+
+    return table;
+}
+
+const createReportNFeForClient = (arr) => {
+    const objClients = {};
+
+    for (const obj of arr[0].enviNFe.nfeProc) {
+        if (!objClients.hasOwnProperty(obj.NFe.infNFe.dest.xNome)) {
+            objClients[obj.NFe.infNFe.dest.xNome] = {
+                CNPJ: "",
+                Amount: 0.0,
+                ValueMoney: 0.0
+            }
+        }
+
+        let amount = 0.0;
+
+        if (obj.NFe.infNFe.det.hasOwnProperty("prod")) {
+            amount = Number(obj.NFe.infNFe.det.prod.qCom);
+        } else {
+            obj.NFe.infNFe.det.forEach(a => {
+                amount += Number(a.prod.qCom);
+            })
+        }
+
+        if(obj.NFe.infNFe.dest.CNPJ === undefined) {
+            console.log(obj);
+        }
+
+        objClients[obj.NFe.infNFe.dest.xNome].Amount += amount;
+        objClients[obj.NFe.infNFe.dest.xNome].CNPJ = obj.NFe.infNFe.dest.CNPJ ? 'CNPJ: ' + obj.NFe.infNFe.dest.CNPJ : 'CPF: ' + obj.NFe.infNFe.dest.CPF;
+        objClients[obj.NFe.infNFe.dest.xNome].ValueMoney += Number(obj.NFe.infNFe.total.ICMSTot.vNF);
+    }
+
+    var table = '';
+    var row = '';
+
+    table = `
+        <table class="table2">
+            <thead class="table-head">
+                <tr class="color-gray2">
+                    <th><strong>CLIENTE</strong></th>
+                    <th><strong>CNPJ | CPF</strong></th>
+                    <th><strong>QUANTIDADE</strong></th>
+                    <th><strong>VALOR</strong></th>
+                </tr>
+            </thead>
+
+            <tbody id="itens-table">`;
+
+    Object.keys(objClients).forEach(key => {
+        row += `
+            <tr>
+                <td class="cliente">${key}</td>
+                <td class="cnpj">${objClients[key].CNPJ}</td>
+                <td class="quantidade">${objClients[key].Amount.toFixed(2)}</td>
+                <td class="valor">R$${objClients[key].ValueMoney.toFixed(2)}</td>
+            </tr>
+        `;
+    })
+
+    row += `
+            <tfoot class="color-gray2">
+                <tr class="color-gray-light total total2">
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
                 </tr>
             </tfoot>
         `;
