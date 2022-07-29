@@ -559,6 +559,8 @@ const createReportNFeYearly = (arr) => {
 
 const createReportNFeForClient = (arr) => {
     const objClients = {};
+    var total = 0;
+    var totalTon = 0;
 
     for (const obj of arr[0].enviNFe.nfeProc) {
         if (!objClients.hasOwnProperty(obj.NFe.infNFe.dest.xNome)) {
@@ -586,6 +588,8 @@ const createReportNFeForClient = (arr) => {
         objClients[obj.NFe.infNFe.dest.xNome].Amount += amount;
         objClients[obj.NFe.infNFe.dest.xNome].CNPJ = obj.NFe.infNFe.dest.CNPJ ? 'CNPJ: ' + obj.NFe.infNFe.dest.CNPJ : 'CPF: ' + obj.NFe.infNFe.dest.CPF;
         objClients[obj.NFe.infNFe.dest.xNome].ValueMoney += Number(obj.NFe.infNFe.total.ICMSTot.vNF);
+        total += amount;
+        totalTon += Number(obj.NFe.infNFe.total.ICMSTot.vNF);
     }
 
     var table = '';
@@ -618,10 +622,10 @@ const createReportNFeForClient = (arr) => {
     row += `
             <tfoot class="color-gray2">
                 <tr class="color-gray-light total total2">
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                    <td><strong>TOTAL<</td>
+                    <td>/strong></td>
+                    <td>${totalTon.toFixed(2)}</td>
+                    <td>R$${total.toFixed(2)}</td>
                 </tr>
             </tfoot>
         `;
