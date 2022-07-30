@@ -8,7 +8,7 @@ function readXMLAsString(e) {
     var files = input.files;
     var reader = new FileReader();
 
-    reader.readAsText(files[0], 'ISO-8859-1');
+    reader.readAsText(files[0], 'UTF-8');
     reader.onload = (e) => {
         xmlString = e.target.result;
     }
