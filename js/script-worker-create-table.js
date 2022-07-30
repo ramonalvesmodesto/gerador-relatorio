@@ -388,53 +388,60 @@ const createReportNFe = (arr) => {
     var total = 0;
     var totalTon = 0;
 
+    const nNfList = {}
+
     table = `
         <table class="table2">
             <thead class="table-head">
                 <tr class="color-gray2">
                     <th><strong>DATA</strong></th>
+                    <th><strong>CLIENTES</strong></th>
                     <th><strong>NFe</strong></th>
                     <th><strong>QUANTIDADE (TON)</strong></th>
                     <th><strong>VALOR</strong></th>
-                    <th><strong>CLIENTES</strong></th>
                 </tr>
             </thead>
 
             <tbody id="itens-table">`;
 
     for (const obj of arr[0].enviNFe.nfeProc) {
+        nNfList[obj.NFe.infNFe.ide.nNF] = obj;
+    }
+
+
+    Object.values(nNfList).forEach(nfe => {
         let amount = 0.0;
 
-        if (obj.NFe.infNFe.det.hasOwnProperty("prod")) {
-            amount = Number(obj.NFe.infNFe.det.prod.qCom);
+        if (nfe.NFe.infNFe.det.hasOwnProperty("prod")) {
+            amount = Number(nfe.NFe.infNFe.det.prod.qCom);
         } else {
-            obj.NFe.infNFe.det.forEach(a => {
+            nfe.NFe.infNFe.det.forEach(a => {
                 amount += Number(a.prod.qCom);
             })
         }
 
         row += `
             <tr>
-                <td class="data">${obj.NFe.infNFe.ide.dhEmi.split('T')[0]}</td>
-                <td class="nfe">${obj.NFe.infNFe.ide.nNF}</td>
+                <td class="data">${nfe.NFe.infNFe.ide.dhEmi.split('T')[0]}</td>
+                <td class="conta">${nfe.NFe.infNFe.dest.xNome}</td>
+                <td class="nfe">${nfe.NFe.infNFe.ide.nNF}</td>
                 <td class="nfe">${amount.toFixed(2)}</td>
-                <td class="valor">${obj.NFe.infNFe.pag.detPag.vPag}</td>
-                <td class="conta">${obj.NFe.infNFe.dest.xNome}</td>
+                <td class="valor">${nfe.NFe.infNFe.pag.detPag.vPag}</td>
             </tr>
         `;
 
-        total += Number(obj.NFe.infNFe.total.ICMSTot.vNF);
+        total += Number(nfe.NFe.infNFe.total.ICMSTot.vNF);
         totalTon += amount;
-    }
+    });
 
     row += `
             <tfoot class="color-gray2">
                 <tr class="color-gray-light total total2">
                     <td id="total"><strong>TOTAL</strong></td>
                     <td></td>
+                    <td></td>
                     <td>${totalTon.toFixed(2)}</td>
                     <td>R$${total.toFixed(2)}</td>
-                    <td></td>
                 </tr>
             </tfoot>
         `;
@@ -462,18 +469,24 @@ const createReportNFeYearly = (arr) => {
     }
     const objMonth = {};
     const objMonthsInfo = {};
+    const nNfList = {}
 
     for (const obj of arr[0].enviNFe.nfeProc) {
-        const dateHour = obj.NFe.infNFe.ide.dhEmi.split('T');
+        nNfList[obj.NFe.infNFe.ide.nNF] = obj;
+    }
+
+
+    Object.values(nNfList).forEach(nfe => {
+        const dateHour = nfe.NFe.infNFe.ide.dhEmi.split('T');
         const month = dateHour[0].split('-')[1];
 
         if (objMonth.hasOwnProperty(month)) {
-            objMonth[month].push(obj);
+            objMonth[month].push(nfe);
         } else {
             objMonth[month] = [];
-            objMonth[month].push(obj)
+            objMonth[month].push(nfe)
         }
-    }
+    });
 
     Object.keys(objMonth).forEach(key => {
         const objData = {
@@ -494,7 +507,7 @@ const createReportNFeYearly = (arr) => {
 
             objData.amount += amount;
             objData.valueMoney += Number(obj.NFe.infNFe.total.ICMSTot.vNF);
-        })
+        });
 
         if (!objMonthsInfo.hasOwnProperty(key)) {
             objMonthsInfo[key] = [];
@@ -529,6 +542,10 @@ const createReportNFeYearly = (arr) => {
             num = i.toString();
         }
 
+        if(!objMonthsInfo.hasOwnProperty(num)) {
+            continue;
+        }
+
         row += `
             <tr>
                 <td class="mes">${months[num]}</td>
@@ -559,12 +576,18 @@ const createReportNFeYearly = (arr) => {
 
 const createReportNFeForClient = (arr) => {
     const objClients = {};
+    const nNfList = {};
     var total = 0;
     var totalTon = 0;
 
     for (const obj of arr[0].enviNFe.nfeProc) {
-        if (!objClients.hasOwnProperty(obj.NFe.infNFe.dest.xNome)) {
-            objClients[obj.NFe.infNFe.dest.xNome] = {
+        nNfList[obj.NFe.infNFe.ide.nNF] = obj;
+    }
+
+
+    Object.values(nNfList).forEach(nfe => {
+        if (!objClients.hasOwnProperty(nfe.NFe.infNFe.dest.xNome)) {
+            objClients[nfe.NFe.infNFe.dest.xNome] = {
                 CNPJ: "",
                 Amount: 0.0,
                 ValueMoney: 0.0
@@ -573,24 +596,20 @@ const createReportNFeForClient = (arr) => {
 
         let amount = 0.0;
 
-        if (obj.NFe.infNFe.det.hasOwnProperty("prod")) {
-            amount = Number(obj.NFe.infNFe.det.prod.qCom);
+        if (nfe.NFe.infNFe.det.hasOwnProperty("prod")) {
+            amount = Number(nfe.NFe.infNFe.det.prod.qCom);
         } else {
-            obj.NFe.infNFe.det.forEach(a => {
+            nfe.NFe.infNFe.det.forEach(a => {
                 amount += Number(a.prod.qCom);
             })
         }
 
-        if(obj.NFe.infNFe.dest.CNPJ === undefined) {
-            console.log(obj);
-        }
-
-        objClients[obj.NFe.infNFe.dest.xNome].Amount += amount;
-        objClients[obj.NFe.infNFe.dest.xNome].CNPJ = obj.NFe.infNFe.dest.CNPJ ? 'CNPJ: ' + obj.NFe.infNFe.dest.CNPJ : 'CPF: ' + obj.NFe.infNFe.dest.CPF;
-        objClients[obj.NFe.infNFe.dest.xNome].ValueMoney += Number(obj.NFe.infNFe.total.ICMSTot.vNF);
-        total += Number(obj.NFe.infNFe.total.ICMSTot.vNF);
+        objClients[nfe.NFe.infNFe.dest.xNome].Amount += amount;
+        objClients[nfe.NFe.infNFe.dest.xNome].CNPJ = nfe.NFe.infNFe.dest.CNPJ ? 'CNPJ: ' + nfe.NFe.infNFe.dest.CNPJ : 'CPF: ' + nfe.NFe.infNFe.dest.CPF;
+        objClients[nfe.NFe.infNFe.dest.xNome].ValueMoney += Number(nfe.NFe.infNFe.total.ICMSTot.vNF);
+        total += Number(nfe.NFe.infNFe.total.ICMSTot.vNF);
         totalTon += amount;
-    }
+    });
 
     var table = '';
     var row = '';
