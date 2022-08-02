@@ -38,6 +38,10 @@ onmessage = function (e) {
             postMessage(createReportNFe(result));
             break;
 
+        case 'Relatório NFe ICMS':
+            postMessage(createReportNFeICMS(result));
+            break;
+
         case 'Relatório NFe Anual':
             postMessage(createReportNFeYearly(result));
             break;
@@ -426,7 +430,7 @@ const createReportNFe = (arr) => {
                 <td class="conta">${nfe.NFe.infNFe.dest.xNome}</td>
                 <td class="nfe">${nfe.NFe.infNFe.ide.nNF}</td>
                 <td class="nfe">${amount.toFixed(2)}</td>
-                <td class="valor">${nfe.NFe.infNFe.pag.detPag.vPag}</td>
+                <td class="valor">${nfe.NFe.infNFe.total.ICMSTot.vNF}</td>
             </tr>
         `;
 
@@ -442,6 +446,121 @@ const createReportNFe = (arr) => {
                     <td></td>
                     <td>${totalTon.toFixed(2)}</td>
                     <td>R$${total.toFixed(2)}</td>
+                </tr>
+            </tfoot>
+        `;
+    table += row;
+    table += `</tbody></table>`;
+
+    return table;
+
+}
+
+const createReportNFeICMS = (arr) => {
+    var table = '';
+    var row = '';
+    var total = 0;
+    var totalTon = 0;
+
+    const nNfList = {};
+    const totalICMS = {
+        vCOFINS: 0.0,
+        vDesc: 0.0,
+        vICMS: 0.0,
+        vIPI: 0.0,
+        vPIS: 0.0,
+        vProd: 0.0,
+        vTotTrib: 0.0
+    };
+
+    table = `
+        <table class="table2">
+            <thead class="table-head">
+                <tr class="color-gray2">
+                    <th><strong>DATA</strong></th>
+                    <th><strong>CLIENTES</strong></th>
+                    <th><strong>NFe</strong></th>
+                    <th><strong>QUANTIDADE (TON)</strong></th>
+                    <th><strong>vNF</strong></th>
+
+                    <th><strong>vCOFINS</strong></th>
+                    <th><strong>vDesc</strong></th>
+                    <th><strong>vICMS</strong></th>
+                    <th><strong>vIPI</strong></th>
+                    <th><strong>vPIS</strong></th>
+                    <th><strong>vProd</strong></th>
+                    <th><strong>vTotTrib</strong></th>
+                </tr>
+            </thead>
+
+            <tbody id="itens-table">`;
+
+    for (const obj of arr[0].enviNFe.nfeProc) {
+        nNfList[obj.NFe.infNFe.ide.nNF] = obj;
+    }
+
+
+    Object.values(nNfList).forEach(nfe => {
+        let amount = 0.0;
+
+        if (nfe.NFe.infNFe.det.hasOwnProperty("prod")) {
+            amount = Number(nfe.NFe.infNFe.det.prod.qCom);
+        } else {
+            nfe.NFe.infNFe.det.forEach(a => {
+                amount += Number(a.prod.qCom);
+            })
+        }
+
+        row += `
+            <tr>
+                <td class="data">${nfe.NFe.infNFe.ide.dhEmi.split('T')[0]}</td>
+                <td class="conta">${nfe.NFe.infNFe.dest.xNome}</td>
+                <td class="nfe">${nfe.NFe.infNFe.ide.nNF}</td>
+                <td class="nfe">${amount.toFixed(2)}</td>
+                <td class="valor">${nfe.NFe.infNFe.total.ICMSTot.vNF}</td>
+
+
+                <td class="valor">${nfe.NFe.infNFe.total.ICMSTot.vCOFINS}</td>
+                <td class="valor">${nfe.NFe.infNFe.total.ICMSTot.vDesc}</td>
+                <td class="valor">${nfe.NFe.infNFe.total.ICMSTot.vICMS}</td>
+                <td class="valor">${nfe.NFe.infNFe.total.ICMSTot.vIPI}</td>
+                <td class="valor">${nfe.NFe.infNFe.total.ICMSTot.vPIS}</td>
+                <td class="valor">${nfe.NFe.infNFe.total.ICMSTot.vProd}</td>
+                <td class="valor">${nfe.NFe.infNFe.total.ICMSTot.vTotTrib ? nfe.NFe.infNFe.total.ICMSTot.vTotTrib : "0.00"}</td>
+            </tr>
+        `;
+
+        total += Number(nfe.NFe.infNFe.total.ICMSTot.vNF);
+        totalTon += amount;
+        totalICMS.vCOFINS += Number(nfe.NFe.infNFe.total.ICMSTot.vCOFINS);
+        totalICMS.vDesc += Number(nfe.NFe.infNFe.total.ICMSTot.vDesc);
+        totalICMS.vICMS += Number(nfe.NFe.infNFe.total.ICMSTot.vICMS);
+        totalICMS.vIPI += Number(nfe.NFe.infNFe.total.ICMSTot.vIPI);
+        totalICMS.vPIS += Number(nfe.NFe.infNFe.total.ICMSTot.vPIS);
+        totalICMS.vProd += Number(nfe.NFe.infNFe.total.ICMSTot.vProd);
+        
+
+        if(nfe.NFe.infNFe.total.ICMSTot.vTotTrib) {
+            totalICMS.vTotTrib += Number(nfe.NFe.infNFe.total.ICMSTot.vTotTrib);
+        }
+    });
+
+    row += `
+            <tfoot class="color-gray2">
+                <tr class="color-gray-light total total2">
+                    <td id="total"><strong>TOTAL</strong></td>
+                    <td></td>
+                    <td></td>
+                    <td>${totalTon.toFixed(2)}</td>
+                    <td>R$${total.toFixed(2)}</td>
+
+                    <td>${totalICMS.vCOFINS.toFixed(2)}</td>
+                    <td>${totalICMS.vDesc.toFixed(2)}</td>
+                    <td>${totalICMS.vICMS.toFixed(2)}</td>
+                    <td>${totalICMS.vIPI.toFixed(2)}</td>
+                    <td>${totalICMS.vPIS.toFixed(2)}</td>
+                    <td>${totalICMS.vProd.toFixed(2)}</td>
+                    <td>${totalICMS.vTotTrib.toFixed(2)}</td>
                 </tr>
             </tfoot>
         `;
@@ -542,7 +661,7 @@ const createReportNFeYearly = (arr) => {
             num = i.toString();
         }
 
-        if(!objMonthsInfo.hasOwnProperty(num)) {
+        if (!objMonthsInfo.hasOwnProperty(num)) {
             continue;
         }
 
