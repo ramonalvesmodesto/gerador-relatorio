@@ -130,6 +130,7 @@ const createReportForDataV1 = (arr) => {
         `;
 
         total = 0;
+        totalTon = 0;
         table += row;
         table += `</tbody></table>`
         tables += table;
@@ -204,6 +205,7 @@ const createReportForDataV2 = (arr) => {
         `;
 
         total = 0;
+        totalTon = 0;
         table += row;
         table += `</tbody></table>`
         tables += table;
