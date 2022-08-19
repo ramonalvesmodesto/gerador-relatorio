@@ -106,6 +106,7 @@ td, tr, th {
     position: relative;
     bottom: 30px;
     font-weight: 700;
+    font-size: 18px;
 }
 
 #jmx {
